@@ -1,4 +1,5 @@
 import { blessData } from "./../../pr/blessing.js";
+import { supData } from "./../../pr/supplication.js";
 /**
  * @desc 获取祈福数组
  * @length 数组长度10000
@@ -8,6 +9,26 @@ import { blessData } from "./../../pr/blessing.js";
 export const blessFun = () => {
   let Data1 = [];
   blessData.map(it => {
+    let itemTitle = it.title;
+    let data = [];
+    data.length = it.pr * 10000;
+    for (let i = 0; i < data.length; i++) {
+      data[i] = itemTitle;
+    }
+    Data1 = [...Data1, ...data];
+  });
+  return Data1;
+};
+
+/**
+ * @desc 获取祈愿数组
+ * @length 数组长度10000
+ * @return Array
+ */
+
+export const supFun = () => {
+  let Data1 = [];
+  supData.map(it => {
     let itemTitle = it.title;
     let data = [];
     data.length = it.pr * 10000;

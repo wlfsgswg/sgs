@@ -58,19 +58,20 @@ class Record extends Component {
                   <img src={delect} alt="" />
                 </div>
               </div>
-              {jsons.map(it => {
+              {jsons.map((it, i) => {
                 return (
-                  <div key={it.time} className="content-item">
+                  <div key={i} className="content-item">
                     <div className="top">
                       <div className="l-left">
                         <div>{it.time}</div>
-                        <div>{it.pay / 1000}开箱</div>
+                        <div>{it.int}开箱</div>
                       </div>
                       <div className="r-right">
                         <div>{it.pay}元宝</div>
                         <div>{it.pay / 100}RMB</div>
                       </div>
                     </div>
+                    <div className="bottom">（{it.name}宝箱）</div>
                     <div className="content">
                       {it.list.length !== 0 &&
                         it.list.map((item, key) => {

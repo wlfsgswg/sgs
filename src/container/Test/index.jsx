@@ -3,7 +3,7 @@ import { List, InputItem, Toast, Button } from "antd-mobile";
 import { createForm } from "rc-form";
 import "./index.less";
 import Condition from "./Condition/index.jsx";
-import { blessFun, getToken, setToken } from "./fun/index.js";
+import { blessFun, supFun, getToken, setToken } from "./fun/index.js";
 const tabs = [
   { title: "祈福", key: "1" },
   { title: "祈愿", key: "2" },
@@ -44,18 +44,20 @@ class Test extends Component {
     this.state = {
       active: "1",
       blessData: [],
+      supData: [],
       bessArr: {}
     };
   }
 
   componentDidMount() {
     const blessData = blessFun();
-    this.setState({ blessData });
+    const supData = supFun();
+    this.setState({ blessData, supData });
   }
 
   handleSure(e) {
-    const { blessData, active } = this.state;
-    Toast.loading("处理中请耐心等待", 1);
+    const { blessData, active, supData } = this.state;
+    Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
     const int = Number(e);
     // 获取时间
@@ -63,7 +65,8 @@ class Test extends Component {
     // 获取开何种箱子
     let name;
     // 开何种箱子分别需要多少花费
-    let pay = (active === "1" ? 1000 : 0) * int;
+    let pay = (active === "1" ? 1000 : active === "2" ? 1000 : 0) * int;
+
     tabs.map(it => {
       if (it.key === active) name = it.title;
     });
@@ -71,7 +74,8 @@ class Test extends Component {
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
       const _random = randomNumber(0, 9999);
-      treasureArr.push(blessData[_random]);
+      if (active === "1") treasureArr.push(blessData[_random]);
+      if (active === "2") treasureArr.push(supData[_random]);
     }
     // 对treasureArr 数据进行处理，相同项合并
     const count = getWordCnt(treasureArr);
@@ -86,7 +90,8 @@ class Test extends Component {
       time: time,
       list: list,
       name: name,
-      pay: pay
+      pay: pay,
+      int: int
     };
     // 此处获取local然后把该项加入local Json
     const localJson = JSON.parse(getToken()) ? JSON.parse(getToken()) : [];
@@ -96,7 +101,7 @@ class Test extends Component {
 
     setTimeout(() => {
       this.setState({ bessArr });
-    }, 1000);
+    }, 300);
   }
 
   render() {
@@ -111,7 +116,7 @@ class Test extends Component {
             onChange={e => this.setState({ active: e })}
           />
           <div className="content">
-            {active === "1" ? (
+            {active === "1" || active === "2" ? (
               <div>
                 <div className="btn-b-10">
                   <Button onClick={() => this.handleSure(1)}>开一次试试</Button>
