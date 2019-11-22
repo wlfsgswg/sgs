@@ -1,5 +1,6 @@
 import { blessData } from "./../../pr/blessing.js";
 import { supData } from "./../../pr/supplication.js";
+import { indexData_3 } from "./../../pr/index3.js";
 /**
  * @desc 获取祈福数组
  * @length 数组长度10000
@@ -32,6 +33,26 @@ export const supFun = () => {
     let itemTitle = it.title;
     let data = [];
     data.length = it.pr * 10000;
+    for (let i = 0; i < data.length; i++) {
+      data[i] = itemTitle;
+    }
+    Data1 = [...Data1, ...data];
+  });
+  return Data1;
+};
+
+/**
+ * @desc 获取花语娇颜数组
+ * @length 数组长度100
+ * @return Array
+ */
+
+export const indexDataC = () => {
+  let Data1 = [];
+  indexData_3.map(it => {
+    let itemTitle = it.title;
+    let data = [];
+    data.length = it.pr;
     for (let i = 0; i < data.length; i++) {
       data[i] = itemTitle;
     }

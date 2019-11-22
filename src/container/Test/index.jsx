@@ -3,7 +3,13 @@ import { List, InputItem, Toast, Button } from "antd-mobile";
 import { createForm } from "rc-form";
 import "./index.less";
 import Condition from "./Condition/index.jsx";
-import { blessFun, supFun, getToken, setToken } from "./fun/index.js";
+import {
+  blessFun,
+  supFun,
+  indexDataC,
+  getToken,
+  setToken
+} from "./fun/index.js";
 const tabs = [
   { title: "祈福", key: "1" },
   { title: "祈愿", key: "2" },
@@ -43,8 +49,9 @@ class Test extends Component {
     super(props);
     this.state = {
       active: "1",
-      blessData: [],
-      supData: [],
+      blessData: [], //祈福宝箱
+      supData: [], //祈愿宝箱
+      indexData3: [], //花语娇颜
       bessArr: {}
     };
   }
@@ -52,11 +59,12 @@ class Test extends Component {
   componentDidMount() {
     const blessData = blessFun();
     const supData = supFun();
-    this.setState({ blessData, supData });
+    const indexData3 = indexDataC();
+    this.setState({ blessData, supData, indexData3 });
   }
 
   handleSure(e) {
-    const { blessData, active, supData } = this.state;
+    const { blessData, active, supData, indexData3 } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
     const int = Number(e);
@@ -65,7 +73,14 @@ class Test extends Component {
     // 获取开何种箱子
     let name;
     // 开何种箱子分别需要多少花费
-    let pay = (active === "1" ? 1000 : active === "2" ? 1000 : 0) * int;
+    let pay =
+      (active === "1"
+        ? 1000
+        : active === "2"
+        ? 1000
+        : active === "3"
+        ? 600
+        : 0) * int;
 
     tabs.map(it => {
       if (it.key === active) name = it.title;
@@ -73,9 +88,14 @@ class Test extends Component {
 
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
-      const _random = randomNumber(0, 9999);
-      if (active === "1") treasureArr.push(blessData[_random]);
-      if (active === "2") treasureArr.push(supData[_random]);
+      if (active === "1" || active === "2") {
+        const _random = randomNumber(0, 9999);
+        if (active === "1") treasureArr.push(blessData[_random]);
+        if (active === "2") treasureArr.push(supData[_random]);
+      } else {
+        const _random = randomNumber(0, 99);
+        if (active === "3") treasureArr.push(indexData3[_random]);
+      }
     }
     // 对treasureArr 数据进行处理，相同项合并
     const count = getWordCnt(treasureArr);
@@ -116,7 +136,7 @@ class Test extends Component {
             onChange={e => this.setState({ active: e })}
           />
           <div className="content">
-            {active === "1" || active === "2" ? (
+            {active === "1" || active === "2" || active === "3" ? (
               <div>
                 <div className="btn-b-10">
                   <Button onClick={() => this.handleSure(1)}>开一次试试</Button>
