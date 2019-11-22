@@ -89,7 +89,13 @@ class Record extends Component {
                         <div>{it.pay / 100}RMB</div>
                       </div>
                     </div>
-                    <div className="bottom">（{it.name}宝箱）</div>
+                    <div className="bottom">
+                      （{it.name}
+                      {it.name === "权溢无度" || it.name === "阴包"
+                        ? "礼包"
+                        : "宝箱"}
+                      ）
+                    </div>
                     <div className="content">
                       {it.list.length !== 0 &&
                         it.list.map((item, key) => {
