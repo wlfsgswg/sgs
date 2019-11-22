@@ -59,6 +59,8 @@ class Test extends Component {
     this.state = {
       active: "9",
       isShowModal: false,
+      int: 0,
+      name: "",
       blessData: [], //祈福宝箱
       supData: [], //祈愿宝箱
       indexData3: [], //花语娇颜
@@ -184,6 +186,7 @@ class Test extends Component {
     }
     // 整理数组从小到大排列
     list.sort((a, b) => a.t - b.t);
+    this.setState({ int, name });
     // 返回
     const bessArr = {
       time: time,
@@ -205,7 +208,7 @@ class Test extends Component {
 
   render() {
     const { getFieldProps } = this.props.form;
-    const { active, bessArr, isShowModal } = this.state;
+    const { active, bessArr, isShowModal, int, name } = this.state;
     return (
       <div className="sgs-test">
         <div className="sgs-test-content">
@@ -262,7 +265,12 @@ class Test extends Component {
               onClose={() => this.setState({ isShowModal: false })}
               title={
                 <div>
-                  <div>收获</div>
+                  <div>
+                    {name}
+                    {name === "权溢无度" || name === "阴包" ? "礼包" : "宝箱"}
+                    {int === 5 ? "五连抽" : int === 10 ? "十连抽" : `${int}抽`}
+                    收获
+                  </div>
                   <div
                     style={{
                       color: "#999",
