@@ -7,6 +7,7 @@ import {
   blessFun,
   supFun,
   indexDataC,
+  indexDataD,
   getToken,
   setToken
 } from "./fun/index.js";
@@ -52,6 +53,7 @@ class Test extends Component {
       blessData: [], //祈福宝箱
       supData: [], //祈愿宝箱
       indexData3: [], //花语娇颜
+      indexData4: [], //木槿海棠
       bessArr: {}
     };
   }
@@ -60,11 +62,12 @@ class Test extends Component {
     const blessData = blessFun();
     const supData = supFun();
     const indexData3 = indexDataC();
-    this.setState({ blessData, supData, indexData3 });
+    const indexData4 = indexDataD();
+    this.setState({ blessData, supData, indexData3, indexData4 });
   }
 
   handleSure(e) {
-    const { blessData, active, supData, indexData3 } = this.state;
+    const { blessData, active, supData, indexData3, indexData4 } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
     const int = Number(e);
@@ -80,6 +83,8 @@ class Test extends Component {
         ? 1000
         : active === "3"
         ? 600
+        : active === "4"
+        ? 200
         : 0) * int;
 
     tabs.map(it => {
@@ -95,6 +100,7 @@ class Test extends Component {
       } else {
         const _random = randomNumber(0, 99);
         if (active === "3") treasureArr.push(indexData3[_random]);
+        if (active === "4") treasureArr.push(indexData4[_random]);
       }
     }
     // 对treasureArr 数据进行处理，相同项合并
@@ -136,7 +142,10 @@ class Test extends Component {
             onChange={e => this.setState({ active: e })}
           />
           <div className="content">
-            {active === "1" || active === "2" || active === "3" ? (
+            {active === "1" ||
+            active === "2" ||
+            active === "3" ||
+            active === "4" ? (
               <div>
                 <div className="btn-b-10">
                   <Button onClick={() => this.handleSure(1)}>开一次试试</Button>
