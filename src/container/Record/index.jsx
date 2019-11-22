@@ -39,7 +39,25 @@ class Record extends Component {
               <div className="title">暂无记录，先去模拟试试</div>
             </div>
           ) : (
-            <div style={{ marginBottom: "10px" }}>
+            <div>
+              <div className="record-bottom">
+                <div className="l-left">
+                  共消耗元宝{" "}
+                  <span style={{ color: "#00a4fa", fontSize: "18px" }}>
+                    {formatMoney(total, false)}
+                  </span>
+                </div>
+              </div>
+              <div className="record-bottom" style={{ marginBottom: "20px" }}>
+                <div className="l-left">
+                  等值人民币
+                  <span style={{ color: "#00a4fa", fontSize: "18px" }}>
+                    {" "}
+                    {formatMoney(total / 100)}
+                  </span>
+                </div>
+              </div>
+
               <div className="flxed">
                 <div
                   className="icon"
@@ -86,23 +104,6 @@ class Record extends Component {
                   </div>
                 );
               })}
-              <div className="record-bottom">
-                <div className="l-left">
-                  共消耗元宝{" "}
-                  <span style={{ color: "#00a4fa", fontSize: "18px" }}>
-                    {formatMoney(total, false)}
-                  </span>
-                </div>
-              </div>
-              <div className="record-bottom">
-                <div className="l-left">
-                  等值人民币
-                  <span style={{ color: "#00a4fa", fontSize: "18px" }}>
-                    {" "}
-                    {formatMoney(total / 100)}
-                  </span>
-                </div>
-              </div>
             </div>
           )}
         </div>

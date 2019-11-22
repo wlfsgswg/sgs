@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, InputItem, Toast, Button } from "antd-mobile";
+import { List, InputItem, Toast, Button, Modal } from "antd-mobile";
 import { createForm } from "rc-form";
 import "./index.less";
 import Condition from "./Condition/index.jsx";
@@ -54,6 +54,7 @@ class Test extends Component {
     super(props);
     this.state = {
       active: "1",
+      isShowModal: false,
       blessData: [], //祈福宝箱
       supData: [], //祈愿宝箱
       indexData3: [], //花语娇颜
@@ -175,13 +176,13 @@ class Test extends Component {
     //已经存入
 
     setTimeout(() => {
-      this.setState({ bessArr });
+      this.setState({ bessArr, isShowModal: true });
     }, 300);
   }
 
   render() {
     const { getFieldProps } = this.props.form;
-    const { active, bessArr } = this.state;
+    const { active, bessArr, isShowModal } = this.state;
     return (
       <div className="sgs-test">
         <div className="sgs-test-content">
@@ -231,19 +232,75 @@ class Test extends Component {
                 </List>
               </div>
             }
-            {/* 根据数组判断 */}
-            <div className="content-bottom">
-              {bessArr.time &&
-                bessArr.list.length !== 0 &&
-                bessArr.list.map((it, j) => {
-                  return (
-                    <div key={j} className="bot-item">
-                      <div className="bot-item-left">{it.name}</div>
-                      <div className="bot-item-right">x {it.t}</div>
-                    </div>
-                  );
-                })}
-            </div>
+            <Modal
+              visible={isShowModal}
+              transparent
+              maskClosable={true}
+              onClose={() => this.setState({ isShowModal: false })}
+              title={
+                <div>
+                  <div>收获</div>
+                  <div
+                    style={{
+                      color: "#999",
+                      lineHeight: "20px",
+                      fontSize: "12px",
+                      paddingTop: "10px"
+                    }}
+                  >
+                    <div>关闭弹窗后你可以去记录查看</div>
+                    <div> 您以往模拟结果</div>
+                  </div>
+                </div>
+              }
+              className="modal"
+              animationType="fade"
+              footer={[
+                {
+                  text: "关闭",
+                  onPress: () => {
+                    this.setState({ isShowModal: false });
+                  }
+                }
+              ]}
+              afterClose={() => {
+                console.log(1);
+              }}
+            >
+              {/* 根据数组判断 */}
+              <div
+                className="content-bottom"
+                style={{
+                  maxHeight: 300,
+                  overflow: "scroll",
+                  paddingTop: "5px"
+                }}
+              >
+                {bessArr.time &&
+                  bessArr.list.length !== 0 &&
+                  bessArr.list.map((it, j) => {
+                    return (
+                      <div
+                        key={j}
+                        className="bot-item"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          padding: "0 20px 10px"
+                        }}
+                      >
+                        <div className="bot-item-left">{it.name}</div>
+                        <div
+                          className="bot-item-right"
+                          style={{ color: "red", opacity: "0.5" }}
+                        >
+                          x {it.t}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </Modal>
           </div>
         </div>
       </div>
