@@ -6,6 +6,49 @@ import { indexData_5 } from "./../../pr/index5.js";
 import { indexData_6 } from "./../../pr/index6.js";
 import { indexData_7 } from "./../../pr/index7.js";
 import { indexData_8 } from "./../../pr/index8.js";
+
+import { indexData_9 } from "./../../pr/data1128/index1.js";
+import { indexData_10 } from "./../../pr/data1128/index2.js";
+/**
+ * @desc 获取权溢无度数组
+ * @length 数组长度10000
+ * @return Array
+ */
+
+export const indexDataI = () => {
+  let Data1 = [];
+  indexData_9.map(it => {
+    let itemTitle = it.title;
+    let data = [];
+    data.length = it.pr * 100;
+    for (let i = 0; i < data.length; i++) {
+      data[i] = itemTitle;
+    }
+    Data1 = [...Data1, ...data];
+  });
+  return Data1;
+};
+
+/**
+ * @desc 获取阴包数组
+ * @length 数组长度10000
+ * @return Array
+ */
+
+export const indexDataJ = () => {
+  let Data1 = [];
+  indexData_10.map(it => {
+    let itemTitle = it.title;
+    let data = [];
+    data.length = it.pr * 100;
+    for (let i = 0; i < data.length; i++) {
+      data[i] = itemTitle;
+    }
+    Data1 = [...Data1, ...data];
+  });
+  return Data1;
+};
+
 /**
  * @desc 获取祈福数组
  * @length 数组长度10000

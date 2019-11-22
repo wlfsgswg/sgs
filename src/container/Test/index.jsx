@@ -13,9 +13,13 @@ import {
   indexDataG,
   indexDataH,
   getToken,
-  setToken
+  setToken,
+  indexDataI,
+  indexDataJ
 } from "./fun/index.js";
 const tabs = [
+  { title: "权溢无度", key: "9" },
+  { title: "阴包", key: "10" },
   { title: "祈福", key: "1" },
   { title: "祈愿", key: "2" },
   { title: "花语娇颜", key: "3" },
@@ -53,7 +57,7 @@ class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: "1",
+      active: "9",
       isShowModal: false,
       blessData: [], //祈福宝箱
       supData: [], //祈愿宝箱
@@ -63,6 +67,8 @@ class Test extends Component {
       indexData6: [],
       indexData7: [],
       indexData8: [],
+      indexData9: [],
+      indexData10: [],
       bessArr: {}
     };
   }
@@ -76,6 +82,8 @@ class Test extends Component {
     const indexData6 = indexDataF();
     const indexData7 = indexDataG();
     const indexData8 = indexDataH();
+    const indexData9 = indexDataI();
+    const indexData10 = indexDataJ();
 
     this.setState({
       blessData,
@@ -85,7 +93,9 @@ class Test extends Component {
       indexData5,
       indexData6,
       indexData7,
-      indexData8
+      indexData8,
+      indexData9,
+      indexData10
     });
   }
 
@@ -99,7 +109,9 @@ class Test extends Component {
       indexData5,
       indexData6,
       indexData7,
-      indexData8
+      indexData8,
+      indexData9,
+      indexData10
     } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
@@ -126,6 +138,10 @@ class Test extends Component {
         ? 200
         : active === "8"
         ? 200
+        : active === "9"
+        ? 500
+        : active === "10"
+        ? 700
         : 0) * int;
 
     tabs.map(it => {
@@ -134,10 +150,17 @@ class Test extends Component {
 
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
-      if (active === "1" || active === "2") {
+      if (
+        active === "1" ||
+        active === "2" ||
+        active === "9" ||
+        active === "10"
+      ) {
         const _random = randomNumber(0, 9999);
         if (active === "1") treasureArr.push(blessData[_random]);
         if (active === "2") treasureArr.push(supData[_random]);
+        if (active === "9") treasureArr.push(indexData9[_random]);
+        if (active === "10") treasureArr.push(indexData10[_random]);
       } else {
         const _random = randomNumber(0, 99);
         if (active === "3") treasureArr.push(indexData3[_random]);
@@ -263,9 +286,6 @@ class Test extends Component {
                   }
                 }
               ]}
-              afterClose={() => {
-                console.log(1);
-              }}
             >
               {/* 根据数组判断 */}
               <div
