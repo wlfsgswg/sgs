@@ -26,29 +26,37 @@ class CopyRight extends Component {
               <div className="title3">如果对作者感兴趣，点击一下头像试试看</div>
             </div>
           </div>
+          <div className="bottom clearfix">
+            <div className="l-left">
+              <div className="item">开发者</div>
+              <div className="qun-right">
+                <span style={{ marginRight: "30px" }}>QQ:</span>
+                <span style={{ color: "red", opacity: "0.7" }}>2496436621</span>
+              </div>
+            </div>
+            <div className="l-left" style={{ marginRight: "20px" }}>
+              <div className="item l-left">点击图标联系作者</div>
+            </div>
+            <div className="l-left" style={{ marginTop: "10px" }}>
+              <a
+                class="qq-chat"
+                href="http://wpa.qq.com/msgrd?v=3&uin=2496436621&site=qq&menu=yes"
+                target="_blank"
+              >
+                <img
+                  alt="联系开发者"
+                  style={{ width: "40px" }}
+                  src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574420007801&di=a257e5bc68434f9af2a9279d05647fe2&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F94e5778c5e82196185851eca538d9082a9fb9c8e3e05-klul1g_fw658"
+                />
+              </a>
+            </div>
+          </div>
+
           <div className="bottom">
-            <div className="item">如果想加入小黑群点击qq标志试一下 </div>
-            <div className="clearfix">
-              <div className="l-left">
-                <div className="qun">
-                  <a
-                    target="_blank"
-                    href="//shang.qq.com/wpa/qunwpa?idkey=d11bfde921e1767bced2034a780dc2ee3e6a95c4f2080f8a2ab222ad9a27c631"
-                  >
-                    <img
-                      border="0"
-                      src="//pub.idqqimg.com/wpa/images/group.png"
-                      alt="小黑D三国杀-交流群"
-                      title="小黑D三国杀-交流群"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div className="r-right qun-right">
-                <div>群号</div>
-                <div style={{ color: "red", opacity: "0.7" }}>739385220</div>
-              </div>
+            <div className="item">小黑群欢迎您 </div>
+            <div className="qun-right">
+              <span style={{ marginRight: "30px" }}>群号:</span>
+              <span style={{ color: "red", opacity: "0.7" }}>739385220</span>
             </div>
           </div>
         </div>
