@@ -60,4 +60,5 @@ class Condition extends Component {
     );
   }
 }
+
 export default Condition;
