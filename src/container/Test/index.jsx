@@ -174,10 +174,14 @@ class Test extends Component {
       }
     }
     // 对treasureArr 数据进行处理，相同项合并
-    // 祈福十次必得一个同心结
-
+    // 祈福十次额外必得至少一个同心结
     if (active === "1" && int === 10) {
-      treasureArr.splice(9, 1, "同心结");
+      // 首次模拟出一定额度同心结
+      const firstTxj = randomNumber(0, 9);
+      const endTxj = firstTxj < 5 ? firstTxj : randomNumber(0, 9);
+      for (let k = 0; k < endTxj; k++) {
+        treasureArr.push("同心结");
+      }
     }
     const count = getWordCnt(treasureArr);
     const list = [];
