@@ -175,6 +175,7 @@ class Test extends Component {
     }
     // 对treasureArr 数据进行处理，相同项合并
     // 祈福十次额外必得至少一个同心结
+
     if (active === "1" && int === 10) {
       // 首次模拟出一定额度同心结
       const firstTxj = randomNumber(0, 9);
