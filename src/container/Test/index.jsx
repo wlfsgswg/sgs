@@ -6,28 +6,18 @@ import Condition from "./Condition/index.jsx";
 import {
   blessFun,
   supFun,
-  indexDataC,
-  indexDataD,
-  indexDataE,
-  indexDataF,
-  indexDataG,
-  indexDataH,
   getToken,
   setToken,
   indexDataI,
   indexDataJ
 } from "./fun/index.js";
+import { indexData1231 } from "./../pr/data1231/index.js";
 const tabs = [
   { title: "权溢无度", key: "9" },
   { title: "阴包", key: "10" },
+
   { title: "祈福", key: "1" },
-  { title: "祈愿", key: "2" },
-  { title: "花语娇颜", key: "3" },
-  { title: "木槿海棠", key: "4" },
-  { title: "鸢尾木兰", key: "5" },
-  { title: "茉莉玉兰", key: "6" },
-  { title: "睡莲丹桂", key: "7" },
-  { title: "芍药昙花", key: "8" }
+  { title: "祈愿", key: "2" }
 ];
 
 const isIPhone = new RegExp("\\biPhone\\b|\\biPod\\b", "i").test(
@@ -63,14 +53,9 @@ class Test extends Component {
       name: "",
       blessData: [], //祈福宝箱
       supData: [], //祈愿宝箱
-      indexData3: [], //花语娇颜
-      indexData4: [], //木槿海棠
-      indexData5: [],
-      indexData6: [],
-      indexData7: [],
-      indexData8: [],
       indexData9: [],
       indexData10: [],
+      indexData31: [],
       bessArr: {}
     };
   }
@@ -78,43 +63,21 @@ class Test extends Component {
   componentDidMount() {
     const blessData = blessFun();
     const supData = supFun();
-    const indexData3 = indexDataC();
-    const indexData4 = indexDataD();
-    const indexData5 = indexDataE();
-    const indexData6 = indexDataF();
-    const indexData7 = indexDataG();
-    const indexData8 = indexDataH();
     const indexData9 = indexDataI();
     const indexData10 = indexDataJ();
+    const indexData31 = indexData1231();
 
     this.setState({
       blessData,
       supData,
-      indexData3,
-      indexData4,
-      indexData5,
-      indexData6,
-      indexData7,
-      indexData8,
       indexData9,
-      indexData10
+      indexData10,
+      indexData31
     });
   }
 
   handleSure(e) {
-    const {
-      blessData,
-      active,
-      supData,
-      indexData3,
-      indexData4,
-      indexData5,
-      indexData6,
-      indexData7,
-      indexData8,
-      indexData9,
-      indexData10
-    } = this.state;
+    const { blessData, active, supData, indexData9, indexData10 } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
     const int = Number(e);
@@ -128,18 +91,6 @@ class Test extends Component {
         ? 1000
         : active === "2"
         ? 1000
-        : active === "3"
-        ? 600
-        : active === "4"
-        ? 200
-        : active === "5"
-        ? 200
-        : active === "6"
-        ? 200
-        : active === "7"
-        ? 200
-        : active === "8"
-        ? 200
         : active === "9"
         ? 500
         : active === "10"
@@ -152,26 +103,11 @@ class Test extends Component {
 
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
-      if (
-        active === "1" ||
-        active === "2" ||
-        active === "9" ||
-        active === "10"
-      ) {
-        const _random = randomNumber(0, 9999);
-        if (active === "1") treasureArr.push(blessData[_random]);
-        if (active === "2") treasureArr.push(supData[_random]);
-        if (active === "9") treasureArr.push(indexData9[_random]);
-        if (active === "10") treasureArr.push(indexData10[_random]);
-      } else {
-        const _random = randomNumber(0, 99);
-        if (active === "3") treasureArr.push(indexData3[_random]);
-        if (active === "4") treasureArr.push(indexData4[_random]);
-        if (active === "5") treasureArr.push(indexData5[_random]);
-        if (active === "6") treasureArr.push(indexData6[_random]);
-        if (active === "7") treasureArr.push(indexData7[_random]);
-        if (active === "8") treasureArr.push(indexData8[_random]);
-      }
+      const _random = randomNumber(0, 9999);
+      if (active === "1") treasureArr.push(blessData[_random]);
+      if (active === "2") treasureArr.push(supData[_random]);
+      if (active === "9") treasureArr.push(indexData9[_random]);
+      if (active === "10") treasureArr.push(indexData10[_random]);
     }
     // 对treasureArr 数据进行处理，相同项合并
     // 祈福十次额外必得至少一个同心结
