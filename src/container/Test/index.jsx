@@ -8,13 +8,13 @@ import {
   supFun,
   getToken,
   setToken,
-  indexDataI,
-  indexDataJ
+  indexData11,
+  indexData12
 } from "./fun/index.js";
 import { indexData1231 } from "./../pr/data1231/index.js";
 const tabs = [
-  { title: "权溢无度", key: "9" },
-  { title: "阴包", key: "10" },
+  { title: "水镜先生", key: "20" },
+  { title: "交趾太守", key: "21" },
   { title: "祈福", key: "1" },
   { title: "陆抗", key: "11" },
   { title: "灵雎", key: "12" },
@@ -68,9 +68,9 @@ class Test extends Component {
       name: "",
       blessData: [], //祈福宝箱
       supData: [], //祈愿宝箱
-      indexData9: [],
-      indexData10: [],
       indexData31: [],
+      indexData_11: [],
+      indexData_12: [],
       bessArr: {}
     };
   }
@@ -78,16 +78,16 @@ class Test extends Component {
   componentDidMount() {
     const blessData = blessFun();
     const supData = supFun();
-    const indexData9 = indexDataI();
-    const indexData10 = indexDataJ();
     const indexData31 = indexData1231();
-
+    const indexData_11 = indexData11();
+    const indexData_12 = indexData12();
+    console.log(indexData_11, indexData_12);
     this.setState({
       blessData,
       supData,
-      indexData9,
-      indexData10,
-      indexData31
+      indexData31,
+      indexData_11,
+      indexData_12
     });
   }
 
@@ -96,9 +96,9 @@ class Test extends Component {
       blessData,
       active,
       supData,
-      indexData9,
-      indexData10,
-      indexData31
+      indexData31,
+      indexData_11,
+      indexData_12
     } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
@@ -113,10 +113,10 @@ class Test extends Component {
         ? 1000
         : active === "2"
         ? 1000
-        : active === "9"
-        ? 500
-        : active === "10"
+        : active === "20"
         ? 700
+        : active === "21"
+        ? 600
         : active === "11"
         ? 399
         : active === "12"
@@ -144,17 +144,13 @@ class Test extends Component {
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
       const _random = randomNumber(0, 9999);
-      if (
-        active === "1" ||
-        active === "2" ||
-        active === "9" ||
-        active === "10"
-      ) {
-        console.log("hahah");
+      const _random2 = randomNumber(0, 99999);
+      if (active === "1" || active === "2") {
         if (active === "1") treasureArr.push(blessData[_random]);
         if (active === "2") treasureArr.push(supData[_random]);
-        if (active === "9") treasureArr.push(indexData9[_random]);
-        if (active === "10") treasureArr.push(indexData10[_random]);
+      } else if (active === "21" || active === "20") {
+        if (active === "20") treasureArr.push(indexData_11[_random2]);
+        if (active === "21") treasureArr.push(indexData_12[_random2]);
       } else {
         treasureArr.push(indexData31[_random]);
       }
@@ -170,12 +166,14 @@ class Test extends Component {
       }
     }
     // 如果tab 11-19则分别加入特定武将名称
-    for (let y = 0; y < treasureArr.length; y++) {
-      if (treasureArr[y] === "稀有武将") treasureArr[y] = fromKey(active);
-      if (treasureArr[y] === "经典武将秀")
-        treasureArr[y] = `${fromKey(active)}武将秀`;
+    if (Number(active) > 10 && Number(active) < 20) {
+      for (let y = 0; y < treasureArr.length; y++) {
+        if (treasureArr[y] === "稀有武将") treasureArr[y] = fromKey(active);
+        if (treasureArr[y] === "经典武将秀")
+          treasureArr[y] = `${fromKey(active)}武将秀`;
+      }
     }
-
+    // 数一下
     const count = getWordCnt(treasureArr);
     const list = [];
     for (let index in count) {

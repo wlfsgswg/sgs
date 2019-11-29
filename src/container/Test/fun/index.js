@@ -9,6 +9,49 @@ import { indexData_8 } from "./../../pr/index8.js";
 
 import { indexData_9 } from "./../../pr/data1128/index1.js";
 import { indexData_10 } from "./../../pr/data1128/index2.js";
+
+import { indexData_11 } from "./../../pr/data1205/index1.js";
+import { indexData_12 } from "./../../pr/data1205/index2.js";
+/**
+ * @desc 获取水镜先生数组
+ * @length 数组长度100000
+ * @return Array
+ */
+
+export const indexData11 = () => {
+  let Data1 = [];
+  indexData_11.map(it => {
+    let itemTitle = it.title;
+    let data = [];
+    data.length = it.pr * 1000;
+    for (let i = 0; i < data.length; i++) {
+      data[i] = itemTitle;
+    }
+    Data1 = [...Data1, ...data];
+  });
+  return Data1;
+};
+
+/**
+ * @desc 获取交趾太守数组
+ * @length 数组长度100000
+ * @return Array
+ */
+
+export const indexData12 = () => {
+  let Data1 = [];
+  indexData_12.map(it => {
+    let itemTitle = it.title;
+    let data = [];
+    data.length = it.pr * 1000;
+    for (let i = 0; i < data.length; i++) {
+      data[i] = itemTitle;
+    }
+    Data1 = [...Data1, ...data];
+  });
+  return Data1;
+};
+
 /**
  * @desc 获取权溢无度数组
  * @length 数组长度10000
