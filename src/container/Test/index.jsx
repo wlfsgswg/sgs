@@ -3,29 +3,24 @@ import { List, InputItem, Toast, Button, Modal } from "antd-mobile";
 import { createForm } from "rc-form";
 import "./index.less";
 import Condition from "./Condition/index.jsx";
-import {
-  blessFun,
-  supFun,
-  getToken,
-  setToken,
-  indexData11,
-  indexData12
-} from "./fun/index.js";
+import { blessFun, getToken, setToken } from "./fun/index.js";
 import { indexData1231 } from "./../pr/data1231/index.js";
+import {
+  indexData1,
+  indexData2,
+  indexData3,
+  indexData4
+} from "./../pr/data1212/index.js";
 const tabs = [
-  { title: "水镜先生", key: "20" },
-  { title: "交趾太守", key: "21" },
-  { title: "祈福", key: "1" },
   { title: "陆抗", key: "11" },
   { title: "灵雎", key: "12" },
   { title: "程昱", key: "13" },
-  { title: "苏飞", key: "14" },
-  { title: "李傕", key: "15" },
-  { title: "张绣", key: "16" },
-  { title: "黄权", key: "17" },
   { title: "唐咨", key: "18" },
+  { title: "黄权", key: "17" },
   { title: "周妃", key: "19" },
-  { title: "祈愿", key: "2" }
+  { title: "苏飞", key: "14" },
+  { title: "张绣", key: "16" },
+  { title: "祈福", key: "1" }
 ];
 // 根据key return title
 const fromKey = e => {
@@ -62,44 +57,40 @@ class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: "20",
+      active: "11",
       isShowModal: false,
       int: 0,
       name: "",
       blessData: [], //祈福宝箱
-      supData: [], //祈愿宝箱
       indexData31: [],
-      indexData_11: [],
-      indexData_12: [],
+      indexData_1: [],
+      indexData_2: [],
+      indexData_3: [],
+      indexData_4: [],
       bessArr: {}
     };
   }
 
   componentDidMount() {
     const blessData = blessFun();
-    const supData = supFun();
     const indexData31 = indexData1231();
-    const indexData_11 = indexData11();
-    const indexData_12 = indexData12();
-    console.log(indexData_11, indexData_12);
+    const indexData_1 = indexData1();
+    const indexData_2 = indexData2();
+    const indexData_3 = indexData3();
+    const indexData_4 = indexData4();
+    console.log(indexData_1, indexData_2, indexData_3, indexData_4);
     this.setState({
       blessData,
-      supData,
       indexData31,
-      indexData_11,
-      indexData_12
+      indexData_1,
+      indexData_2,
+      indexData_3,
+      indexData_4
     });
   }
 
   handleSure(e) {
-    const {
-      blessData,
-      active,
-      supData,
-      indexData31,
-      indexData_11,
-      indexData_12
-    } = this.state;
+    const { blessData, active, indexData31 } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
     const int = Number(e);
@@ -111,12 +102,6 @@ class Test extends Component {
     let pay =
       (active === "1"
         ? 1000
-        : active === "2"
-        ? 1000
-        : active === "20"
-        ? 700
-        : active === "21"
-        ? 600
         : active === "11"
         ? 399
         : active === "12"
@@ -144,13 +129,9 @@ class Test extends Component {
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
       const _random = randomNumber(0, 9999);
-      const _random2 = randomNumber(0, 99999);
-      if (active === "1" || active === "2") {
-        if (active === "1") treasureArr.push(blessData[_random]);
-        if (active === "2") treasureArr.push(supData[_random]);
-      } else if (active === "21" || active === "20") {
-        if (active === "20") treasureArr.push(indexData_11[_random2]);
-        if (active === "21") treasureArr.push(indexData_12[_random2]);
+      // const _random2 = randomNumber(0, 99999);
+      if (active === "1") {
+        treasureArr.push(blessData[_random]);
       } else {
         treasureArr.push(indexData31[_random]);
       }
