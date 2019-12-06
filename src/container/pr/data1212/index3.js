@@ -1,3 +1,4 @@
+// 红缨彩云礼包 300
 export const indexData_3 = [
   { title: "红缨彩云(静态形象)", pr: 5 },
   { title: "红缨彩云(动态形象)", pr: 2 },
