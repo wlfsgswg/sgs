@@ -47,7 +47,7 @@ class Condition extends Component {
           <NoticeBar
             marqueeProps={{ loop: true, style: { padding: "0 7.5px" } }}
           >
-            以下为2019年11月29日-12月5日水镜先生礼包、交趾太守礼包模拟；以及11.15-11.21祈福活动概率模拟；选择下列模拟选项卡，能对不同礼包（宝箱）进行模拟。
+            以下为2019年12.6-12.12一心一力周卡礼包、文和礼包等模拟；以及截止于12.31的武将礼包活动概率模拟；选择下列模拟选项卡，能对不同礼包进行模拟。
           </NoticeBar>
           <Tabs
             tabs={tabs}
