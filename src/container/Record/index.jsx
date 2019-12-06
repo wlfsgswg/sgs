@@ -91,7 +91,7 @@ class Record extends Component {
                     </div>
                     <div className="bottom">
                       （{it.name}
-                      {"礼包"}）
+                      {it.name === "一心一力" ? "周卡礼包" : "礼包"}）
                     </div>
                     <div className="content">
                       {it.list.length !== 0 &&

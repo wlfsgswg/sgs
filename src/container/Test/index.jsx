@@ -12,7 +12,7 @@ import {
   indexData4
 } from "./../pr/data1212/index.js";
 const tabs = [
-  { title: "一心一力周卡", key: "1" },
+  { title: "一心一力", key: "1" },
   { title: "文和", key: "4" },
   { title: "暖冬", key: "2" },
   { title: "红缨彩云", key: "3" },
@@ -295,7 +295,7 @@ class Test extends Component {
                 <div>
                   <div>
                     {name}
-                    {"礼包"}
+                    {active === "1" ? "周卡礼包" : "礼包"}
                     {int === 5 ? "五连抽" : int === 10 ? "十连抽" : `${int}抽`}
                     收获
                   </div>
