@@ -39,7 +39,7 @@ class CopyRight extends Component {
             </div>
             <div className="l-left" style={{ marginTop: "10px" }}>
               <a
-                class="qq-chat"
+                className="qq-chat"
                 href="http://wpa.qq.com/msgrd?v=3&uin=2496436621&site=qq&menu=yes"
                 target="_blank"
               >
