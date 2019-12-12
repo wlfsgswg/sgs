@@ -11,7 +11,9 @@ import {
   indexData3,
   indexData4
 } from "./../pr/data1212/index.js";
+import { indexDataBless } from "./../pr/data1219/index.js";
 const tabs = [
+  { title: "祈福", key: "5" },
   { title: "一心一力", key: "1" },
   { title: "文和", key: "4" },
   { title: "暖冬", key: "2" },
@@ -60,11 +62,12 @@ class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: "1",
+      active: "5",
       isShowModal: false,
       int: 0,
       name: "",
       blessData: [], //祈福宝箱
+      blessData2: [], //祈福2宝箱
       indexData31: [],
       indexData_1: [],
       indexData_2: [],
@@ -76,6 +79,7 @@ class Test extends Component {
 
   componentDidMount() {
     const blessData = blessFun();
+    const blessData2 = indexDataBless();
     const indexData31 = indexData1231();
     const indexData_1 = indexData1();
     const indexData_2 = indexData2();
@@ -83,6 +87,7 @@ class Test extends Component {
     const indexData_4 = indexData4();
     this.setState({
       blessData,
+      blessData2,
       indexData31,
       indexData_1,
       indexData_2,
@@ -94,6 +99,7 @@ class Test extends Component {
   handleSure(e) {
     const {
       active,
+      blessData2,
       indexData31,
       indexData_1,
       indexData_2,
@@ -117,6 +123,8 @@ class Test extends Component {
         ? 300
         : active === "4"
         ? 600
+        : active === "5"
+        ? 1000
         : active === "11"
         ? 399
         : active === "12"
@@ -169,6 +177,8 @@ class Test extends Component {
         treasureArr.push(indexData_3[_random1]);
       } else if (active === "4") {
         treasureArr.push(indexData_4[_random2]);
+      } else if (active === "5") {
+        treasureArr.push(blessData2[_random]);
       } else {
         treasureArr.push(indexData31[_random]);
       }
@@ -179,6 +189,17 @@ class Test extends Component {
         if (treasureArr[y] === "稀有武将") treasureArr[y] = fromKey(active);
         if (treasureArr[y] === "经典武将秀")
           treasureArr[y] = `${fromKey(active)}武将秀`;
+      }
+    }
+    // 对祈福宝箱进行保底
+    if (active === "5" && int > 9) {
+      const length = Math.floor(int / 10);
+      for (let r = 0; r < length; r++) {
+        const randomFirst = randomNumber(1, 9);
+        const random = randomFirst > 4 ? randomNumber(1, 9) : randomFirst;
+        for (let ui = 0; ui < random; ui++) {
+          treasureArr.push("同心结");
+        }
       }
     }
     // 对treasureArr 数据进行处理，相同项合并
@@ -295,7 +316,11 @@ class Test extends Component {
                 <div>
                   <div>
                     {name}
-                    {active === "1" ? "周卡礼包" : "礼包"}
+                    {active === "1"
+                      ? "周卡礼包"
+                      : active === "5"
+                      ? "宝箱"
+                      : "礼包"}
                     {int === 5 ? "五连抽" : int === 10 ? "十连抽" : `${int}抽`}
                     收获
                   </div>
