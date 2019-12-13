@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
   mode: "production", //生产环境
-  devtool: "cheap-module--source-map",
+  devtool: "cheap-module--source",
   entry: {
     bundle: "./index.js"
   },
