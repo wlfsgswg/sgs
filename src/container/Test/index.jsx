@@ -133,14 +133,11 @@ class Test extends Component {
     if (active === "5" && int > 9) {
       const length = Math.floor(int / 10);
       for (let r = 0; r < length; r++) {
-        const randomFirst = randomNumber(1, 10);
-        const randomSecond = randomFirst > 4 ? randomNumber(1, 9) : randomFirst;
-        const randomThred = randomFirst > 5 ? randomNumber(1, 9) : randomSecond;
-        const random4 = randomFirst > 6 ? randomNumber(1, 9) : randomThred;
-        const random5 = randomFirst > 7 ? randomNumber(1, 9) : random4;
-        const random6 = randomFirst > 8 ? randomNumber(1, 9) : random5;
-        const random7 = randomFirst > 9 ? randomNumber(1, 9) : random6;
-        for (let ui = 0; ui < random7; ui++) {
+        let randomFirst;
+        randomFirst =
+          randomNumber(1, 11) > 1 ? randomNumber(5, 8) : randomNumber(1, 11);
+        treasureArr.pop();
+        for (let ui = 0; ui < randomFirst; ui++) {
           // treasureArr.push("同心结");
           baodi++;
         }
