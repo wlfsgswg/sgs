@@ -5,19 +5,9 @@ import "./index.less";
 import Condition from "./Condition/index.jsx";
 import { blessFun, getToken, setToken } from "./fun/index.js";
 import { indexData1231 } from "./../pr/data1231/index.js";
-import {
-  indexData1,
-  indexData2,
-  indexData3,
-  indexData4
-} from "./../pr/data1212/index.js";
 import { indexDataBless } from "./../pr/data1219/index.js";
 const tabs = [
   { title: "祈福", key: "5" },
-  { title: "一心一力", key: "1" },
-  { title: "文和", key: "4" },
-  { title: "暖冬", key: "2" },
-  { title: "红缨彩云", key: "3" },
   { title: "陆抗", key: "11" },
   { title: "灵雎", key: "12" },
   { title: "程昱", key: "13" },
@@ -69,10 +59,6 @@ class Test extends Component {
       blessData: [], //祈福宝箱
       blessData2: [], //祈福2宝箱
       indexData31: [],
-      indexData_1: [],
-      indexData_2: [],
-      indexData_3: [],
-      indexData_4: [],
       bessArr: {}
     };
   }
@@ -81,31 +67,15 @@ class Test extends Component {
     const blessData = blessFun();
     const blessData2 = indexDataBless();
     const indexData31 = indexData1231();
-    const indexData_1 = indexData1();
-    const indexData_2 = indexData2();
-    const indexData_3 = indexData3();
-    const indexData_4 = indexData4();
     this.setState({
       blessData,
       blessData2,
-      indexData31,
-      indexData_1,
-      indexData_2,
-      indexData_3,
-      indexData_4
+      indexData31
     });
   }
 
   handleSure(e) {
-    const {
-      active,
-      blessData2,
-      indexData31,
-      indexData_1,
-      indexData_2,
-      indexData_3,
-      indexData_4
-    } = this.state;
+    const { active, blessData2, indexData31 } = this.state;
     Toast.loading("处理中请耐心等待", 0.3);
     // 开宝箱次数
     const int = Number(e);
@@ -115,15 +85,7 @@ class Test extends Component {
     let name;
     // 开何种箱子分别需要多少花费
     let pay =
-      (active === "1"
-        ? 11111
-        : active === "2"
-        ? 300
-        : active === "3"
-        ? 300
-        : active === "4"
-        ? 600
-        : active === "5"
+      (active === "5"
         ? 1000
         : active === "11"
         ? 399
@@ -152,32 +114,7 @@ class Test extends Component {
     const treasureArr = [];
     for (let i = 0; i < int; i++) {
       const _random = randomNumber(0, 9999);
-      const _random1 = randomNumber(0, 99);
-      const _random2 = randomNumber(0, 99999);
-      if (active === "1") {
-        const [a, b, c, d, e, f, g] = [
-          randomNumber(0, 99),
-          randomNumber(0, 99),
-          randomNumber(0, 99),
-          randomNumber(0, 99),
-          randomNumber(0, 99),
-          randomNumber(0, 99),
-          randomNumber(0, 99)
-        ];
-        treasureArr.push(indexData_1[a]);
-        treasureArr.push(indexData_1[b]);
-        treasureArr.push(indexData_1[c]);
-        treasureArr.push(indexData_1[d]);
-        treasureArr.push(indexData_1[e]);
-        treasureArr.push(indexData_1[f]);
-        treasureArr.push(indexData_1[g]);
-      } else if (active === "2") {
-        treasureArr.push(indexData_2[_random]);
-      } else if (active === "3") {
-        treasureArr.push(indexData_3[_random1]);
-      } else if (active === "4") {
-        treasureArr.push(indexData_4[_random2]);
-      } else if (active === "5") {
+      if (active === "5") {
         treasureArr.push(blessData2[_random]);
       } else {
         treasureArr.push(indexData31[_random]);
@@ -407,6 +344,9 @@ class Test extends Component {
                 )}
               </div>
             </Modal>
+          </div>
+          <div className="pos">
+            祈福模拟只为单纯测试，和实际开箱可能会有出入，建议慎重氪金，小编不承担额外责任
           </div>
         </div>
       </div>

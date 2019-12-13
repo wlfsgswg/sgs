@@ -3,7 +3,7 @@ import { Carousel, WingBlank, Tabs, NoticeBar } from "antd-mobile";
 import "./index.less";
 import Sgs1 from "./../../../image/sgs1.jpeg";
 import Sgs2 from "./../../../image/sgs2.jpeg";
-import Sgs3 from "./../../../image/sgs3.jpeg";
+import Sgs3 from "./../../../image/sgs3.jpg";
 import Sgs4 from "./../../../image/sgs4.jpeg";
 
 class Condition extends Component {
