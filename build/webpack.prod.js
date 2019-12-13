@@ -59,7 +59,7 @@ module.exports = {
   output: {
     filename: "[name]_[hash].js",
     path: resolve(__dirname, "../dist"),
-    publicPath: "" //加上./会造成webpack devserver找不到特定的页面，不加会导致打包的js引入失败
+    publicPath: "/" //加上./会造成webpack devserver找不到特定的页面，不加会导致打包的js引入失败
   }
 };
 // htmlwebpackplugin会在打包结束后自动生成一个html文件，并把打包生成的js自动引入到这个文件中
