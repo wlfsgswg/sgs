@@ -192,13 +192,20 @@ class Test extends Component {
       }
     }
     // 对祈福宝箱进行保底
+    let baodi = 0;
     if (active === "5" && int > 9) {
       const length = Math.floor(int / 10);
       for (let r = 0; r < length; r++) {
-        const randomFirst = randomNumber(1, 9);
-        const random = randomFirst > 4 ? randomNumber(1, 9) : randomFirst;
-        for (let ui = 0; ui < random; ui++) {
-          treasureArr.push("同心结");
+        const randomFirst = randomNumber(1, 10);
+        const randomSecond = randomFirst > 4 ? randomNumber(1, 9) : randomFirst;
+        const randomThred = randomFirst > 5 ? randomNumber(1, 9) : randomSecond;
+        const random4 = randomFirst > 6 ? randomNumber(1, 9) : randomThred;
+        const random5 = randomFirst > 7 ? randomNumber(1, 9) : random4;
+        const random6 = randomFirst > 8 ? randomNumber(1, 9) : random5;
+        const random7 = randomFirst > 9 ? randomNumber(1, 9) : random6;
+        for (let ui = 0; ui < random7; ui++) {
+          // treasureArr.push("同心结");
+          baodi++;
         }
       }
     }
@@ -211,6 +218,9 @@ class Test extends Component {
     }
     // 整理数组从小到大排列
     list.sort((a, b) => a.t - b.t);
+    if (baodi > 0) {
+      list.push({ name: "保底同心结", t: baodi, color: "red" });
+    }
     this.setState({ int, name });
     // 返回
     const bessArr = {
@@ -370,7 +380,12 @@ class Test extends Component {
                           padding: "0 20px 10px"
                         }}
                       >
-                        <div className="bot-item-left">{it.name}</div>
+                        <div
+                          className="bot-item-left"
+                          style={it.color ? { color: it.color } : {}}
+                        >
+                          {it.name}
+                        </div>
                         <div
                           className="bot-item-right"
                           style={{ color: "red", opacity: "0.5" }}
