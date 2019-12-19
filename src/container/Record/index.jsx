@@ -52,12 +52,10 @@ class Record extends Component {
                 <div className="l-left">
                   等值人民币
                   <span style={{ color: "#00a4fa", fontSize: "18px" }}>
-                    {" "}
                     {formatMoney(total / 100)}
                   </span>
                 </div>
               </div>
-
               <div className="flxed">
                 <div
                   className="icon"
@@ -78,36 +76,38 @@ class Record extends Component {
               </div>
               {jsons.map((it, i) => {
                 return (
-                  <div key={i} className="content-item">
-                    <div className="top">
-                      <div className="l-left">
-                        <div>{it.time}</div>
-                        <div>{it.int}开箱</div>
+                  <div key={i} className="content-ul">
+                    <div className="content-item">
+                      <div className="top">
+                        <div className="l-left">
+                          <div>{it.time}</div>
+                          <div>{it.int}开箱</div>
+                        </div>
+                        <div className="r-right">
+                          <div>{it.pay}元宝</div>
+                          <div>{it.pay / 100}RMB</div>
+                        </div>
                       </div>
-                      <div className="r-right">
-                        <div>{it.pay}元宝</div>
-                        <div>{it.pay / 100}RMB</div>
+                      <div className="bottom">
+                        （{it.name}
+                        {it.name === "一心一力"
+                          ? "周卡礼包"
+                          : it.name === "祈福"
+                          ? "宝箱"
+                          : "礼包"}
+                        ）
                       </div>
-                    </div>
-                    <div className="bottom">
-                      （{it.name}
-                      {it.name === "一心一力"
-                        ? "周卡礼包"
-                        : it.name === "祈福"
-                        ? "宝箱"
-                        : "礼包"}
-                      ）
-                    </div>
-                    <div className="content">
-                      {it.list.length !== 0 &&
-                        it.list.map((item, key) => {
-                          return (
-                            <div key={key} className="item ">
-                              <div className="l-left">{item.name}</div>
-                              <div className="r-right">x{item.t}</div>
-                            </div>
-                          );
-                        })}
+                      <div className="content">
+                        {it.list.length !== 0 &&
+                          it.list.map((item, key) => {
+                            return (
+                              <div key={key} className="item ">
+                                <div className="l-left">{item.name}</div>
+                                <div className="r-right">x{item.t}</div>
+                              </div>
+                            );
+                          })}
+                      </div>
                     </div>
                   </div>
                 );

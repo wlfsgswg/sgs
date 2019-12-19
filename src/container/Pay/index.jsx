@@ -33,12 +33,11 @@ class Record extends Component {
               <div className="title">暂无花费，先去模拟试试</div>
             </div>
           ) : (
-            <div style={{ marginBottom: "10px" }}>
+            <div>
               <div className="record-bottom">
                 <div className="l-left">
                   等值人民币
                   <span style={{ color: "#00a4fa", fontSize: "18px" }}>
-                    {" "}
                     {formatMoney(total / 100)}
                   </span>
                 </div>
