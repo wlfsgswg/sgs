@@ -9,7 +9,10 @@ import IconReA from "./icon/record_a.png";
 import IconRe from "./icon/record.png";
 import IconTeA from "./icon/test_a.png";
 import IconTe from "./icon/test.png";
-
+import IconPay from "./icon/pay.png";
+import IconPayA from "./icon/pay_a.png";
+import IconSelf from "./icon/self.png";
+import IconSelfA from "./icon/self_a.png";
 class TabBarExample extends React.Component {
   constructor(props) {
     super(props);
@@ -112,17 +115,29 @@ class TabBarExample extends React.Component {
               {this.renderContent()}
             </TabBar.Item>
             <TabBar.Item
-              icon={{
-                uri:
-                  "https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg"
-              }}
-              selectedIcon={{
-                uri:
-                  "https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg"
-              }}
+              icon={
+                <div
+                  style={{
+                    width: "22px",
+                    height: "22px",
+                    background: `url(${IconPay}) center center /  21px 21px no-repeat`
+                  }}
+                />
+              }
+              selectedIcon={
+                <div
+                  style={{
+                    width: "22px",
+                    height: "22px",
+                    background: `url(${IconPayA}) center center /  21px 21px no-repeat`
+                  }}
+                />
+              }
               title="花费"
               key="花费"
               // dot
+              // #949494
+              // #33A3F4
               selected={this.state.selectedTab === "3"}
               onPress={() => {
                 this.setState({
@@ -138,8 +153,7 @@ class TabBarExample extends React.Component {
                   style={{
                     width: "22px",
                     height: "22px",
-                    background:
-                      "url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat"
+                    background: `url(${IconSelf}) center center /  21px 21px no-repeat`
                   }}
                 />
               }
@@ -148,8 +162,7 @@ class TabBarExample extends React.Component {
                   style={{
                     width: "22px",
                     height: "22px",
-                    background:
-                      "url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat"
+                    background: `url(${IconSelfA}) center center /  21px 21px no-repeat`
                   }}
                 />
               }
