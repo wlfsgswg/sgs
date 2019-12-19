@@ -133,8 +133,8 @@ class TabBarExample extends React.Component {
                   }}
                 />
               }
-              title="花费"
-              key="花费"
+              title="小游戏"
+              key="小游戏"
               // dot
               // #949494
               // #33A3F4
