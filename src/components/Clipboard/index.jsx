@@ -9,7 +9,6 @@ class Clipboard extends Component {
   }
 
   handleClip = () => {
-    console.log(this.props.type);
     const { type } = this.props;
     Toast.info(
       <div style={{ fontSize: "12px" }}>

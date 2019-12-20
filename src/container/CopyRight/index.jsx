@@ -22,7 +22,6 @@ class CopyRight extends Component {
   }
 
   onOpenChange = (...args) => {
-    console.log(args);
     this.setState({ open: !this.state.open });
   };
 
@@ -198,7 +197,7 @@ class CopyRight extends Component {
               }
             }
           ]}
-          afterClose={() => console.log("afterClose")}
+          afterClose={() => {}}
         >
           <div style={{ height: 400, overflow: "scroll" }}>
             <div className="p-b-5">支付宝红包会不定时发放</div>
