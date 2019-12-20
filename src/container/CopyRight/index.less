@@ -1,72 +1,136 @@
 .sgs-copy {
-    height: 100%;
+    height          : 100%;
     background-color: #fff;
+
     &-content {
         position: relative;
+
         .top {
-            width: 100%;
+            width : 100%;
             height: 200px;
-            img{
-                width: 100%;
+
+            img {
+                width : 100%;
                 height: 200px;
             }
         }
-        .pos{
+
+        .pos {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            .content{
-                color: #fff;
-                text-align: center;
+            top     : 0;
+            left    : 0;
+            width   : 100%;
+
+            .content {
+                color      : #fff;
+                text-align : center;
                 padding-top: 40px;
-                .img{
-                    width: 60px;
-                    height: 60px;
-                    margin: 0 auto;
+
+                .img {
+                    width        : 60px;
+                    height       : 60px;
+                    margin       : 0 auto;
                     border-radius: 50%;
-                    overflow: hidden;
-                    img{
+                    overflow     : hidden;
+
+                    img {
                         width: 100%;
                     }
                 }
-                .title{
-                    font-size: 18px;
+
+                .title {
+                    font-size  : 18px;
                     font-weight: 600;
                     line-height: 40px;
                 }
-                .title3{
-                    font-size: 14px;
+
+                .title3 {
+                    font-size  : 14px;
                     line-height: 25px;
                 }
-                .title3{
-                    font-size: 14px;
+
+                .title3 {
+                    font-size  : 14px;
                     line-height: 25px;
                 }
             }
         }
 
-        .item{
-            padding: 10px 20px;
-            display: flex;
+        .item {
+            padding        : 10px 10px 10px 20px;
+            display        : flex;
             justify-content: space-between;
-            border-bottom: 1px solid #ddd;
-            flex-direction: row;
-            .my-icon-div{
+            border-bottom  : 1px solid #ddd;
+            flex-direction : row;
+
+            .my-icon-div {
                 width: 34px;
             }
-            .left,.right{
+
+            .left,
+            .right {
                 line-height: 22px;
-                height: 22px;
+                height     : 22px;
             }
         }
 
-        .bottom{
+        .bottom {
             background-color: #ddd;
-            padding-top: 20px;
-            .content{
+            padding-top     : 20px;
+            color           : #333;
+
+            .content {
                 background-color: #fff;
             }
+        }
+    }
+
+    .am-drawer.am-drawer-left .am-drawer-draghandle {
+        width: 0;
+    }
+
+    .my-drawer {
+        position                  : relative;
+        overflow                  : auto;
+        height                    : 100%;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .my-drawer .am-drawer-sidebar {
+        background-color          : #fff;
+        overflow                  : auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .my-drawer .am-drawer-sidebar .am-list {
+        width  : 200px;
+        padding: 0;
+    }
+
+    // 炫酷字体
+    .p-fs {
+
+        overflow   : hidden; //超出部分隐藏
+        font-size  : 1.2rem; //大小
+        font-style : oblique; //倾斜
+        text-align : left;
+        line-height: 3rem; //垂直居中
+        background-image: -webkit-linear-gradient(left, green, yellow, pink, blue, red 25%, green 35%,
+                blue 50%, yellow 60%, red 75%, pink 85%, blue 100%); //括号内可添加多种颜色，多种百分比   线性渐变
+        -webkit-text-fill-color: transparent; //颜色填充 透明
+        -webkit-background-clip: text; //背景颜色绘制区域
+        animation              : stream 15s infinite linear; //流动 15秒 循环 直线
+        background-size        : 200% 100%;
+
+    }
+    @keyframes stream {
+        //匀速流动
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: -100% 0;
         }
     }
 }

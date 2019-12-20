@@ -11,7 +11,7 @@ class Record extends Component {
   render() {
     return (
       <div className="sgs-pay">
-        <div className="sgs-pay-content">222</div>
+        <div className="sgs-pay-content">开发中，敬请期待...</div>
       </div>
     );
   }
