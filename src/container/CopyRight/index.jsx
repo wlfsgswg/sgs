@@ -10,6 +10,7 @@ import Right from "./../../icon/right.png";
 import Dog from "./../../icon/dog.png";
 import Red from "./../../icon/red.png";
 import RedB from "./img/red-b.jpg";
+import Link from "./../../icon/link.png";
 import { Clipboard } from "./../../components/index.js";
 class CopyRight extends Component {
   constructor(props) {
@@ -115,13 +116,31 @@ class CopyRight extends Component {
                           style={{ width: "24px", height: "24px" }}
                         />
                       </div>
-                      <div className="l-left">QQ群</div>
+                      <div className="l-left">QQ群聊</div>
                     </div>
                   </div>
                   <div className="right">
                     <Clipboard num={739385220} type={"QQ群号"} />
                   </div>
                 </div>
+                <div className="item">
+                  <div className="left">
+                    <div className="p-r-10 clearfix">
+                      <div className="l-left p-r-10 my-icon-div">
+                        <img
+                          src={Link}
+                          alt=""
+                          style={{ width: "20px", height: "20px" }}
+                        />
+                      </div>
+                      <div className="l-left">分享网址</div>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <Clipboard num={"applis.applinzi.com"} type={"link"} />
+                  </div>
+                </div>
+
                 <div className="item">
                   <div className="left">
                     <div className="p-r-10 clearfix">
@@ -182,7 +201,8 @@ class CopyRight extends Component {
           afterClose={() => console.log("afterClose")}
         >
           <div style={{ height: 400, overflow: "scroll" }}>
-            <img src={RedB} alt="" style={{ height: "350px" }} />
+            <div className="p-b-5">支付宝红包会不定时发放</div>
+            <img src={RedB} alt="" style={{ height: "360px" }} />
           </div>
         </Modal>
       </div>

@@ -13,7 +13,9 @@ class Clipboard extends Component {
     const { type } = this.props;
     Toast.info(
       <div style={{ fontSize: "12px" }}>
-        {`${type}已复制成功，打开QQ可直接黏贴搜索添加。`}
+        {type === "link"
+          ? "网址已复制，直接黏贴QQ，微信，贴吧等即可实现分享"
+          : `${type}已复制成功，打开QQ可直接黏贴搜索添加。`}
       </div>,
       2,
       () => {},
