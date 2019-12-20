@@ -26,7 +26,7 @@ class TabBarExample extends React.Component {
   renderContent(pageText) {
     const { selectedTab } = this.state;
     return (
-      <div>
+      <div style={{ height: "100%" }}>
         {selectedTab === "1" ? (
           <Test />
         ) : selectedTab === "2" ? (

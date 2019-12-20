@@ -1,2 +1,3 @@
 import TabBar from "./TabBar/index.jsx";
-export { TabBar };
+import Clipboard from "./Clipboard/index.jsx";
+export { TabBar, Clipboard };
