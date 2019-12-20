@@ -42,7 +42,7 @@ class CopyRight extends Component {
                   </div>
                 </div>
                 <div className="right ">
-                  <Clipboard num={2496436621} />
+                  <Clipboard num={2496436621} type={"QQ号"} />
                 </div>
               </div>
               <div className="item">
@@ -59,7 +59,7 @@ class CopyRight extends Component {
                   </div>
                 </div>
                 <div className="right">
-                  <Clipboard num={739385220} />
+                  <Clipboard num={739385220} type={"QQ群号"} />
                 </div>
               </div>
             </div>
