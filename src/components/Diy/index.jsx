@@ -38,12 +38,6 @@ class Diy extends React.Component {
         <div className="sgs-component-diy-menu">
           <div className="top">DIY三国杀武将</div>
         </div>
-        <SelfRadio
-          physical={physical}
-          country={country}
-          onChangePhy={e => this.setState({ physical: e })}
-          onChangeCou={e => this.setState({ country: e })}
-        />
         <div style={{ backgroundColor: "#f5f5f9", paddingBottom: "10px" }}>
           <div style={{ backgroundColor: "#fff" }}>
             <List
@@ -110,6 +104,12 @@ class Diy extends React.Component {
             });
             this.setState({ art });
           }}
+        />
+        <SelfRadio
+          physical={physical}
+          country={country}
+          onChangePhy={e => this.setState({ physical: e })}
+          onChangeCou={e => this.setState({ country: e })}
         />
         <div>目前还在制作中请耐心等待...</div>
       </div>
