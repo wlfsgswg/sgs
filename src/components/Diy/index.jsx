@@ -101,7 +101,17 @@ class Diy extends React.Component {
               );
             }
           }}
+          onChange={(para, i, e) => {
+            const { art } = this.state;
+            art.map((it, index) => {
+              if (index === i) {
+                it[para] = e;
+              }
+            });
+            this.setState({ art });
+          }}
         />
+        <div>目前还在制作中请耐心等待...</div>
       </div>
     );
   }

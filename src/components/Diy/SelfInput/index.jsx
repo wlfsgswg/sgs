@@ -25,7 +25,9 @@ class SelfInput extends Component {
                           i === 0 ? "例如：激昂" : "技能名称限制四字以内"
                         }`}
                         value={it.name}
-                        onChange={e => console.log(e)}
+                        onChange={e => {
+                          this.props.onChange("name", i, e);
+                        }}
                         maxLength={4}
                       >
                         {`名称`}
@@ -38,7 +40,7 @@ class SelfInput extends Component {
                             ? "例如：你打牌的时候可以很激昂"
                             : "请填写技能介绍"
                         }
-                        onChange={e => console.log(e)}
+                        onChange={e => this.props.onChange("desc", i, e)}
                         autoHeight
                         data-seed="logId"
                       />
