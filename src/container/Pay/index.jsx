@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./index.less";
+import { Diy } from "./../../components/index.js";
 class Record extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,9 @@ class Record extends Component {
   render() {
     return (
       <div className="sgs-pay">
-        <div className="sgs-pay-content">开发中，敬请期待...</div>
+        <div className="sgs-pay-content">
+          <Diy />
+        </div>
       </div>
     );
   }
