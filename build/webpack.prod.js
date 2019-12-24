@@ -13,14 +13,18 @@ module.exports = {
         test: /\.(png|jpg|gif|jpeg)$/,
         use: [
           {
-            loader: "url-loader"
-            // options: {
-            //     name: '[name]_[hash].[ext]',
-            //     outputPath: 'images/',
-            //     limit: 2048
-            // },
+            loader: "url-loader",
+            options: {
+              name: "[name]_[hash].[ext]",
+              outputPath: "images/",
+              limit: 2048
+            }
           }
         ]
+      },
+      {
+        test: /\.(ttf|otf)$/,
+        use: ["url-loader"]
       },
       {
         test: /\.css$/,

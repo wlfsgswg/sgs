@@ -345,6 +345,7 @@ class Test extends Component {
           <div className="pos">
             祈福模拟只为单纯测试，和实际开箱可能会有出入，建议慎重氪金，小编不承担额外责任
           </div>
+          <div className="sgs-component-muban-font">甘宁</div>
         </div>
       </div>
     );
