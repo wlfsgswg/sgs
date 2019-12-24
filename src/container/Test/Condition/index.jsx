@@ -5,7 +5,6 @@ import Sgs1 from "./../../../image/sgs1.jpeg";
 import Sgs2 from "./../../../image/sgs2.jpeg";
 import Sgs3 from "./../../../image/sgs3.jpeg";
 import Sgs4 from "./../../../image/sgs4.jpeg";
-
 class Condition extends Component {
   constructor(props) {
     super(props);
