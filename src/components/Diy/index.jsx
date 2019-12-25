@@ -2,44 +2,14 @@ import React from "react";
 import { ImagePicker, List, Toast, InputItem, Button } from "antd-mobile";
 import SelfRadio from "./SelfRadio/index.jsx";
 import SelfInput from "./SelfInput/index.jsx";
-import { getImgCounty, getImgJ } from "./../../util/index.js";
+import { getImgCounty, getImgJ, stringToArr } from "./../../util/index.js";
 import "./index.less";
 class Diy extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   // 背景图片
-    //   files: [],
-    //   //武将体力
-    //   physical: 3,
-    //   //武将势力
-    //   country: 1,
-    //   // 武将技能
-    //   art: [
-    //     {
-    //       name: "",
-    //       desc: ""
-    //     },
-    //     {
-    //       name: "",
-    //       desc: ""
-    //     }
-    //   ],
-    //   // 武将名字
-    //   heroName: "",
-    //   // 武将四字成语
-    //   heroText: "",
-    //   width: 240,
-    //   height: 360
-    // };
     this.state = {
       // 背景图片
-      files: [
-        {
-          url:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577250306418&di=d45e6146fa2b759a701cc20d3c961498&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F9cc3b34ef1497b1385a2db877ef187d4f2a0692a840f3-Pbe9QE_fw658"
-        }
-      ],
+      files: [],
       //武将体力
       physical: 3,
       //武将势力
@@ -47,8 +17,8 @@ class Diy extends React.Component {
       // 武将技能
       art: [
         {
-          name: "激昂",
-          desc: "你打牌可以很激昂"
+          name: "",
+          desc: ""
         },
         {
           name: "",
@@ -56,12 +26,11 @@ class Diy extends React.Component {
         }
       ],
       // 武将名字
-      heroName: "颜良文丑",
+      heroName: "",
       // 武将四字成语
-      heroText: "江东小霸王",
-      // cnavas宽高
-      width: 240,
-      height: 360
+      heroText: "",
+      width: 260,
+      height: 390
     };
   }
 
@@ -144,15 +113,9 @@ class Diy extends React.Component {
         // 等所有图片请求完再做其他操作
         // 写描述
         ctx.font = "16px myFont1";
-        // 设置颜色
         ctx.fillStyle = "#f1d96c";
-        // 设置字体
         ctx.textAlign = "center";
-        // 设置垂直对齐方式
         ctx.textBaseline = "middle";
-        // 设置字体font family
-        // ctx.fontFamily = "KaiTi";
-        // 绘制文字
         heroTextArr.map((it, i) => {
           ctx.fillText(
             it,
@@ -162,23 +125,16 @@ class Diy extends React.Component {
             30
           );
         });
-
-        // // 写武将名字
+        // 写武将名字
         ctx.font = "30px myFont";
-        // 设置颜色
         ctx.fillStyle = "#fcfcef";
-        // 设置字体
         ctx.textAlign = "center";
-        // 设置垂直对齐方式
         ctx.textBaseline = "middle";
-
+        // 轻微模糊阴影
         ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
-        // 将阴影向右移动15px，向上移动10px
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 2;
-        // 轻微模糊阴影
         ctx.shadowBlur = 2;
-        // 绘制文字
         heroNameArr.map((it, i) => {
           ctx.fillText(
             it,
@@ -188,6 +144,135 @@ class Diy extends React.Component {
             30
           );
         });
+        // 画武将技能框
+        // 透明实心矩形
+        // 边框颜色
+        ctx.fillStyle =
+          country === 1
+            ? "rgba(166,176,189,0.5)"
+            : country === 2
+            ? "rgba(219,191,166,0.5)"
+            : country === 3
+            ? "rgba(164,168,131,0.5)"
+            : country === 4
+            ? "rgba(164,161,157,0.5)"
+            : "";
+        // 长方形高度和定位高度存在关联
+        let RectHeight = 0;
+        art.map((it, i) => {
+          const length = stringToArr(it.desc, 17).length * 11;
+          RectHeight += length;
+        });
+        const rect = RectHeight + 25;
+
+        const rectPosTop = 370 - rect;
+        const rectPosLeft = 44;
+        ctx.fillRect(rectPosLeft, rectPosTop, 198, rect);
+        // 添加技能描述
+        art.map((it, i) => {
+          ctx.shadowColor = "rgba(0, 0, 0, 1)";
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+          ctx.shadowBlur = 0;
+
+          ctx.textAlign = "left";
+          // 画技能图
+          if (it.name) {
+            const imgLeft = new Image();
+            const destArr = stringToArr(it.desc, 17);
+
+            imgLeft.onload = () => {
+              const st1 = stringToArr(art[0].desc, 17).length === 1 ? 14 : 4;
+              const tt1 = stringToArr(art[0].desc, 17).length === 1 ? 25 : 15;
+              let st2;
+              let tt2;
+              if (
+                stringToArr(art[0].desc, 17).length === 1 &&
+                stringToArr(art[1].desc, 17).length === 1
+              ) {
+                st2 = 24;
+                tt2 = 35;
+              } else if (
+                stringToArr(art[0].desc, 17).length !== 1 &&
+                stringToArr(art[1].desc, 17).length !== 1
+              ) {
+                st2 = 4;
+                tt2 = 15;
+              } else {
+                st2 = 14;
+                tt2 = 25;
+              }
+
+              ctx.drawImage(
+                imgLeft,
+                rectPosLeft - 30,
+                i === 0
+                  ? rectPosTop + 4
+                  : i === 1
+                  ? rectPosTop + st1 + stringToArr(art[0].desc, 17).length * 11
+                  : rectPosTop +
+                    st2 +
+                    stringToArr(art[0].desc, 17).length * 11 +
+                    stringToArr(art[1].desc, 17).length * 11,
+                50,
+                25
+              );
+              ctx.font = "14px sans-serif";
+              ctx.fillStyle = "#000";
+              ctx.fillText(
+                it.name,
+                rectPosLeft - 23,
+                i === 0
+                  ? rectPosTop + 15
+                  : i === 1
+                  ? rectPosTop + tt1 + stringToArr(art[0].desc, 17).length * 11
+                  : rectPosTop +
+                    tt2 +
+                    stringToArr(art[0].desc, 17).length * 11 +
+                    stringToArr(art[1].desc, 17).length * 11
+              );
+            };
+            imgLeft.src = getImgJ(country);
+            ctx.font = "10px sans-serif";
+            ctx.fillStyle = "#fff";
+
+            destArr.map((it, index) => {
+              const ot1 = stringToArr(art[0].desc, 17).length === 1 ? 24 : 14;
+              let ot2;
+              if (
+                stringToArr(art[0].desc, 17).length === 1 &&
+                stringToArr(art[1].desc, 17).length === 1
+              ) {
+                ot2 = 34;
+              } else if (
+                stringToArr(art[0].desc, 17).length !== 1 &&
+                stringToArr(art[1].desc, 17).length !== 1
+              ) {
+                ot2 = 14;
+              } else {
+                ot2 = 24;
+              }
+
+              ctx.fillText(
+                it,
+                rectPosLeft + 20,
+                i === 0
+                  ? rectPosTop + 14 + index * 11
+                  : i === 1
+                  ? rectPosTop +
+                    ot1 +
+                    stringToArr(art[0].desc, 17).length * 11 +
+                    index * 11
+                  : rectPosTop +
+                    ot2 +
+                    stringToArr(art[0].desc, 17).length * 11 +
+                    stringToArr(art[1].desc, 17).length * 11 +
+                    index * 11
+              );
+            });
+          }
+        });
+        //
       };
       imgBgc.src = imgBgcStr;
     };
@@ -212,14 +297,14 @@ class Diy extends React.Component {
         </div>
         <div style={{ backgroundColor: "#f5f5f9", paddingBottom: "10px" }}>
           <div style={{ backgroundColor: "#fff" }}>
-            <List renderHeader={() => "填写武将名称（最多四字）"}>
+            <List renderHeader={() => "填写武将名称（最多三字）"}>
               <InputItem
                 placeholder={`例如：孙策`}
                 value={heroName}
                 onChange={e => {
                   this.setState({ heroName: e });
                 }}
-                maxLength={4}
+                maxLength={3}
               >
                 武将名称
               </InputItem>

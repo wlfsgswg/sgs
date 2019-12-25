@@ -36,3 +36,17 @@ export const getImgCounty = (country = 1, physical = 3) => {
 export const getImgJ = (country = 1) => {
   return countryJ[country - 1];
 };
+/**
+ *
+ * @param {*} str
+ * @param {*} n
+ */
+
+export const stringToArr = (str = "", n = 12) => {
+  const strArr = [];
+  for (let i = 0, l = str.length; i < l / n; i++) {
+    const a = str.slice(n * i, n * (i + 1));
+    strArr.push(a);
+  }
+  return strArr;
+};

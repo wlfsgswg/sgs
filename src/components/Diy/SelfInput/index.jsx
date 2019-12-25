@@ -22,13 +22,13 @@ class SelfInput extends Component {
                         1}`}</div>
                       <InputItem
                         placeholder={`${
-                          i === 0 ? "例如：激昂" : "技能名称限制四字以内"
+                          i === 0 ? "例如：激昂" : "技能名称限制二字以内"
                         }`}
                         value={it.name}
                         onChange={e => {
                           this.props.onChange("name", i, e);
                         }}
-                        maxLength={4}
+                        maxLength={2}
                       >
                         {`名称`}
                       </InputItem>
@@ -43,6 +43,7 @@ class SelfInput extends Component {
                         onChange={e => this.props.onChange("desc", i, e)}
                         autoHeight
                         data-seed="logId"
+                        maxLength={68}
                       />
                     </div>
                   );
