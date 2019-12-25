@@ -2,13 +2,44 @@ import React from "react";
 import { ImagePicker, List, Toast, InputItem, Button } from "antd-mobile";
 import SelfRadio from "./SelfRadio/index.jsx";
 import SelfInput from "./SelfInput/index.jsx";
+import { getImgCounty } from "./../../util/index.js";
 import "./index.less";
 class Diy extends React.Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   // 背景图片
+    //   files: [],
+    //   //武将体力
+    //   physical: 3,
+    //   //武将势力
+    //   country: 1,
+    //   // 武将技能
+    //   art: [
+    //     {
+    //       name: "",
+    //       desc: ""
+    //     },
+    //     {
+    //       name: "",
+    //       desc: ""
+    //     }
+    //   ],
+    //   // 武将名字
+    //   heroName: "",
+    //   // 武将四字成语
+    //   heroText: "",
+    //   width: 240,
+    //   height: 360
+    // };
     this.state = {
       // 背景图片
-      files: [],
+      files: [
+        {
+          url:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577250306418&di=d45e6146fa2b759a701cc20d3c961498&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F9cc3b34ef1497b1385a2db877ef187d4f2a0692a840f3-Pbe9QE_fw658"
+        }
+      ],
       //武将体力
       physical: 3,
       //武将势力
@@ -16,8 +47,8 @@ class Diy extends React.Component {
       // 武将技能
       art: [
         {
-          name: "",
-          desc: ""
+          name: "激昂",
+          desc: "你打牌可以很激昂"
         },
         {
           name: "",
@@ -25,9 +56,12 @@ class Diy extends React.Component {
         }
       ],
       // 武将名字
-      heroName: "",
+      heroName: "孙策",
       // 武将四字成语
-      heroText: ""
+      heroText: "江东小霸王",
+      // cnavas宽高
+      width: 240,
+      height: 360
     };
   }
 
@@ -36,7 +70,7 @@ class Diy extends React.Component {
   };
   // 一键生成cnavans,条件预判
   handleSummit = () => {
-    const { heroName, heroText, art, files } = this.state;
+    const { heroName, heroText, art, files, width, height } = this.state;
     if (!heroName)
       return Toast.info(
         <div style={{ fontSize: "12px" }}>请填写武将名称！</div>,
@@ -79,11 +113,48 @@ class Diy extends React.Component {
   };
   // 画图
   handleDraw = () => {
-    console.log(1);
+    const {
+      heroName,
+      heroText,
+      art,
+      files,
+      width,
+      height,
+      country,
+      physical
+    } = this.state;
+    const myCanvas = document.getElementById("myCanvas");
+    const ctx = myCanvas.getContext("2d");
+    // 先清除画布
+    ctx.clearRect(0, 0, width, height);
+    // 获取背景图
+    const imgBgcStr = getImgCounty(country, physical);
+
+    // 武将图
+    const imgHero = new Image();
+    imgHero.onload = () => {
+      ctx.drawImage(imgHero, 38, 20, width - 50, height - 30);
+      // 画完武将再画背景，背景在武将上边
+      const imgBgc = new Image();
+      imgBgc.onload = () => {
+        ctx.drawImage(imgBgc, 0, 0, width, height);
+      };
+      imgBgc.src = imgBgcStr;
+    };
+    imgHero.src = files[0].url;
   };
 
   render() {
-    const { files, physical, country, art, heroName, heroText } = this.state;
+    const {
+      files,
+      physical,
+      country,
+      art,
+      heroName,
+      heroText,
+      width,
+      height
+    } = this.state;
     return (
       <div className="sgs-component-diy">
         <div className="sgs-component-diy-menu">
@@ -198,8 +269,7 @@ class Diy extends React.Component {
         <Button type="primary" onClick={this.handleSummit}>
           点击生成DIY武将
         </Button>
-        <div className="sgs-component-muban-font">甘宁</div>
-        <div className="sgs-component-muban-font2">甘宁</div>
+        <canvas id="myCanvas" width={width} height={height}></canvas>
       </div>
     );
   }

@@ -35,7 +35,6 @@ class SelfRadio extends Component {
                 key={4}
                 checked={physical === 4}
                 onChange={() => this.handlePhysical(4)}
-                disabled={true}
               >
                 4体力（阴阳鱼）
               </RadioItem>
@@ -75,13 +74,6 @@ class SelfRadio extends Component {
                 onChange={() => this.handleCountry(4)}
               >
                 群
-              </RadioItem>
-              <RadioItem
-                key={5}
-                checked={country === 5}
-                onChange={() => this.handleCountry(5)}
-              >
-                神
               </RadioItem>
             </List>
           </div>
