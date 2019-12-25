@@ -404,7 +404,12 @@ class Diy extends React.Component {
         <Button type="primary" onClick={this.handleSummit}>
           点击生成DIY武将
         </Button>
-        <canvas id="myCanvas" width={width} height={height}></canvas>
+        <div style={{ width, margin: "0 auto" }}>
+          <div>
+            下图为diy图片展示区，完成输入框填写，点击按钮即可展示，开发ing，敬请等待
+          </div>
+          <canvas id="myCanvas" width={width} height={height}></canvas>
+        </div>
       </div>
     );
   }
