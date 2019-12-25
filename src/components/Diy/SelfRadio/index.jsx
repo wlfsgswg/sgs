@@ -23,7 +23,7 @@ class SelfRadio extends Component {
       <div className="sgs-diy-selfradio">
         <div style={{ backgroundColor: "#f5f5f9", paddingBottom: "10px" }}>
           <div style={{ backgroundColor: "#fff" }}>
-            <List renderHeader={() => "选择武将体力（4体力模板暂不开放）"}>
+            <List renderHeader={() => "选择武将体力"}>
               <RadioItem
                 key={3}
                 checked={physical === 3}

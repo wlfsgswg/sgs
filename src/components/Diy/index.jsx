@@ -56,7 +56,7 @@ class Diy extends React.Component {
         }
       ],
       // 武将名字
-      heroName: "孙策",
+      heroName: "颜良文丑",
       // 武将四字成语
       heroText: "江东小霸王",
       // cnavas宽高
@@ -125,9 +125,9 @@ class Diy extends React.Component {
     } = this.state;
     const heroTextArr = heroText.split("");
     const heroNameArr = heroName.split("");
-    console.log(heroTextArr, heroNameArr);
     const myCanvas = document.getElementById("myCanvas");
     const ctx = myCanvas.getContext("2d");
+    // // 字体加载
     // 先清除画布
     ctx.clearRect(0, 0, width, height);
     // 获取背景图
@@ -143,9 +143,9 @@ class Diy extends React.Component {
         ctx.drawImage(imgBgc, 0, 0, width, height);
         // 等所有图片请求完再做其他操作
         // 写描述
-        ctx.font = "13px bold hycxj";
+        ctx.font = "16px myFont1";
         // 设置颜色
-        ctx.fillStyle = "#fcfcef";
+        ctx.fillStyle = "#f1d96c";
         // 设置字体
         ctx.textAlign = "center";
         // 设置垂直对齐方式
@@ -163,14 +163,21 @@ class Diy extends React.Component {
           );
         });
 
-        // 写武将名字
-        ctx.font = "25px bold hycxj";
+        // // 写武将名字
+        ctx.font = "30px myFont";
         // 设置颜色
         ctx.fillStyle = "#fcfcef";
         // 设置字体
         ctx.textAlign = "center";
         // 设置垂直对齐方式
         ctx.textBaseline = "middle";
+
+        ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+        // 将阴影向右移动15px，向上移动10px
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        // 轻微模糊阴影
+        ctx.shadowBlur = 2;
         // 绘制文字
         heroNameArr.map((it, i) => {
           ctx.fillText(
@@ -205,7 +212,7 @@ class Diy extends React.Component {
         </div>
         <div style={{ backgroundColor: "#f5f5f9", paddingBottom: "10px" }}>
           <div style={{ backgroundColor: "#fff" }}>
-            <List renderHeader={() => "填写武将名称"}>
+            <List renderHeader={() => "填写武将名称（最多四字）"}>
               <InputItem
                 placeholder={`例如：孙策`}
                 value={heroName}
