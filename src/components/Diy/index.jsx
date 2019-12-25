@@ -2,7 +2,7 @@ import React from "react";
 import { ImagePicker, List, Toast, InputItem, Button } from "antd-mobile";
 import SelfRadio from "./SelfRadio/index.jsx";
 import SelfInput from "./SelfInput/index.jsx";
-import { getImgCounty } from "./../../util/index.js";
+import { getImgCounty, getImgJ } from "./../../util/index.js";
 import "./index.less";
 class Diy extends React.Component {
   constructor(props) {
@@ -56,9 +56,9 @@ class Diy extends React.Component {
         }
       ],
       // 武将名字
-      heroName: "孙策",
+      heroName: "孙策孙策",
       // 武将四字成语
-      heroText: "江东小霸王",
+      heroText: "江东小霸王王",
       // cnavas宽高
       width: 240,
       height: 360
@@ -123,6 +123,9 @@ class Diy extends React.Component {
       country,
       physical
     } = this.state;
+    const heroTextArr = heroText.split("");
+    const heroNameArr = heroName.split("");
+    console.log(heroTextArr, heroNameArr);
     const myCanvas = document.getElementById("myCanvas");
     const ctx = myCanvas.getContext("2d");
     // 先清除画布
@@ -138,6 +141,46 @@ class Diy extends React.Component {
       const imgBgc = new Image();
       imgBgc.onload = () => {
         ctx.drawImage(imgBgc, 0, 0, width, height);
+        // 等所有图片请求完再做其他操作
+        // 写描述
+        ctx.font = "13px bold hycxj";
+        // 设置颜色
+        ctx.fillStyle = "#fcfcef";
+        // 设置字体
+        ctx.textAlign = "center";
+        // 设置垂直对齐方式
+        ctx.textBaseline = "middle";
+        // 设置字体font family
+        // ctx.fontFamily = "KaiTi";
+        // 绘制文字
+        heroTextArr.map((it, i) => {
+          ctx.fillText(
+            it,
+            country === 3 ? 32 : 28,
+            (6 - heroTextArr.length) * 10 + 70 + i * 17,
+            30,
+            30
+          );
+        });
+
+        // 写武将名字
+        ctx.font = "25px bold hycxj";
+        // 设置颜色
+        ctx.fillStyle = "#fcfcef";
+        // 设置字体
+        ctx.textAlign = "center";
+        // 设置垂直对齐方式
+        ctx.textBaseline = "middle";
+        // 绘制文字
+        heroNameArr.map((it, i) => {
+          ctx.fillText(
+            it,
+            country === 3 ? 30 : 26,
+            (4 - heroNameArr.length) * 5 + 180 + i * 30,
+            30,
+            30
+          );
+        });
       };
       imgBgc.src = imgBgcStr;
     };
