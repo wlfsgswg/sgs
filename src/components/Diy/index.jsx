@@ -56,9 +56,9 @@ class Diy extends React.Component {
         }
       ],
       // 武将名字
-      heroName: "孙策孙策",
+      heroName: "孙策",
       // 武将四字成语
-      heroText: "江东小霸王王",
+      heroText: "江东小霸王",
       // cnavas宽高
       width: 240,
       height: 360
