@@ -69,7 +69,7 @@ export const stringToArr = (str = "", n = 12) => {
  * @param {*} context
  */
 
-// 获取像素比
+// 获取canvas像素比
 export const getPixelRatio = context => {
   const backingStore =
     context.backingStorePixelRatio ||
