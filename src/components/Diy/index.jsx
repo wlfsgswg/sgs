@@ -5,51 +5,20 @@ import {
   Toast,
   InputItem,
   Button,
-  Modal
+  Modal,
+  Radio
 } from "antd-mobile";
 import SelfRadio from "./SelfRadio/index.jsx";
 import SelfInput from "./SelfInput/index.jsx";
 import { getImgCounty, getImgJ, stringToArr } from "./../../util/index.js";
+const RadioItem = Radio.RadioItem;
 import "./index.less";
 class Diy extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   // 背景图片
-    //   files: [],
-    //   //武将体力
-    //   physical: 3,
-    //   //武将势力
-    //   country: 1,
-    //   // 武将技能
-    //   art: [
-    //     {
-    //       name: "",
-    //       desc: ""
-    //     },
-    //     {
-    //       name: "",
-    //       desc: ""
-    //     }
-    //   ],
-    //   // 武将名字
-    //   heroName: "",
-    //   // 武将四字成语
-    //   heroText: "",
-    //   width: 260,
-    //   height: 390,
-    // strDataURI: "",
-    //   modal:false
-    // };
-
     this.state = {
       // 背景图片
-      files: [
-        {
-          url:
-            "https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=a83be289a9c27d1eb12b33967abcc60b/d043ad4bd11373f0fe063fb2a90f4bfbfbed04e5.jpg"
-        }
-      ],
+      files: [],
       //武将体力
       physical: 3,
       //武将势力
@@ -57,27 +26,23 @@ class Diy extends React.Component {
       // 武将技能
       art: [
         {
-          name: "激昂",
-          desc: "你打牌可以很激昂你打牌可以"
+          name: "",
+          desc: ""
         },
         {
-          name: "天义",
-          desc: "义起你可以没义义起你可"
-        },
-        {
-          name: "天义",
-          desc:
-            "义起你可以没义起你可义起你可以没义起你可以没义起你可以没义起义起你可以没义起你可以没义起你可以没义起以没义起你可以没义起你可以没义起义起你可以没义起你可以没义起你可以没义起义起你可以没义起你可以没义起"
+          name: "",
+          desc: ""
         }
       ],
       // 武将名字
-      heroName: "孙策",
+      heroName: "",
       // 武将四字成语
-      heroText: "京东小霸王",
+      heroText: "",
       width: 260,
       height: 390,
       strDataURI: "",
-      modal: false
+      modal: false,
+      linkBol: true
     };
   }
 
@@ -137,7 +102,8 @@ class Diy extends React.Component {
       width,
       height,
       country,
-      physical
+      physical,
+      linkBol
     } = this.state;
     const heroTextArr = heroText.split("");
     const heroNameArr = heroName.split("");
@@ -212,7 +178,7 @@ class Diy extends React.Component {
           const length = stringToArr(it.desc, 17).length * 11;
           RectHeight += length;
         });
-        const rect = RectHeight + 25;
+        const rect = RectHeight + 35;
 
         const rectPosTop = 370 - rect;
         const rectPosLeft = 44;
@@ -330,6 +296,25 @@ class Diy extends React.Component {
               );
             });
 
+            ctx.font = "12px sans-serif";
+            ctx.fillStyle = "#fff";
+            ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.shadowBlur = 2;
+            if (linkBol)
+              ctx.fillText(
+                "Copyright:小黑，链接：applis.applinzi.com/",
+                40,
+                380,
+                200,
+                20
+              );
+            ctx.shadowColor = "rgba(0, 0, 0, 1)";
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.shadowBlur = 0;
+
             setTimeout(() => {
               const strDataURI = myCanvas.toDataURL("image/jpeg");
               this.setState({ strDataURI, modal: true });
@@ -344,6 +329,36 @@ class Diy extends React.Component {
     };
     imgHero.src = files[0].url;
   };
+  // 下载图片
+
+  download = () => {
+    this.downloadFile("diy.png", this.state.strDataURI);
+  };
+  //下载
+  downloadFile = (fileName, content) => {
+    let aLink = document.createElement("a");
+    let blob = this.base64ToBlob(content); //new Blob([content]);
+
+    let evt = document.createEvent("HTMLEvents");
+    evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+    aLink.download = fileName;
+    aLink.href = URL.createObjectURL(blob);
+    aLink.click();
+  };
+  //base64转blob
+  base64ToBlob = code => {
+    let parts = code.split(";base64,");
+    let contentType = parts[0].split(":")[1];
+    let raw = window.atob(parts[1]);
+    let rawLength = raw.length;
+
+    let uInt8Array = new Uint8Array(rawLength);
+
+    for (let i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+    return new Blob([uInt8Array], { type: contentType });
+  };
 
   render() {
     const {
@@ -354,7 +369,8 @@ class Diy extends React.Component {
       heroName,
       heroText,
       width,
-      height
+      height,
+      linkBol
     } = this.state;
     return (
       <div className="sgs-component-diy">
@@ -467,6 +483,27 @@ class Diy extends React.Component {
           onChangePhy={e => this.setState({ physical: e })}
           onChangeCou={e => this.setState({ country: e })}
         />
+        <div style={{ backgroundColor: "#f5f5f9", paddingBottom: "10px" }}>
+          <div style={{ backgroundColor: "#fff" }}>
+            <List renderHeader={() => "是否添加原作者"}>
+              <RadioItem
+                key={3}
+                checked={linkBol}
+                onChange={() => this.setState({ linkBol: true })}
+              >
+                是
+              </RadioItem>
+              <RadioItem
+                key={4}
+                checked={!linkBol}
+                onChange={() => this.setState({ linkBol: false })}
+              >
+                否
+              </RadioItem>
+            </List>
+          </div>
+        </div>
+
         <Button type="primary" onClick={this.handleSummit}>
           点击生成DIY武将
         </Button>
@@ -481,7 +518,7 @@ class Diy extends React.Component {
         <Modal
           visible={this.state.modal}
           transparent
-          maskClosable={false}
+          maskClosable={true}
           onClose={() => this.setState({ modal: false })}
           title="DIY武将"
           style={{ width: "300px" }}
@@ -489,6 +526,7 @@ class Diy extends React.Component {
             {
               text: "保存图片到相册",
               onPress: () => {
+                this.download();
                 this.setState({ modal: false });
               }
             }
