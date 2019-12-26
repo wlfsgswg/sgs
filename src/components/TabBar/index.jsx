@@ -40,8 +40,6 @@ class TabBarExample extends React.Component {
     );
   }
 
-  handlePress(e) {}
-
   render() {
     return (
       <div className="sgs-components-tabbar">
@@ -80,7 +78,6 @@ class TabBarExample extends React.Component {
                 this.setState({
                   selectedTab: "1"
                 });
-                this.handlePress(1);
               }}
               data-seed="logId"
             >
@@ -113,7 +110,6 @@ class TabBarExample extends React.Component {
                 this.setState({
                   selectedTab: "2"
                 });
-                this.handlePress(2);
               }}
               data-seed="logId1"
             >
@@ -148,7 +144,6 @@ class TabBarExample extends React.Component {
                 this.setState({
                   selectedTab: "3"
                 });
-                this.handlePress(3);
               }}
             >
               {this.renderContent()}
@@ -179,7 +174,6 @@ class TabBarExample extends React.Component {
                 this.setState({
                   selectedTab: "4"
                 });
-                this.handlePress(4);
               }}
             >
               {this.renderContent()}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./index.less";
-import { Modal } from "antd-mobile";
+import { Modal, Button, Toast } from "antd-mobile";
 import { getToken, formatMoney, removeToken } from "./../Test/fun/index.js";
 import noRecord from "./no_record.png";
 import delect from "./delete.png";
@@ -16,6 +16,10 @@ class Record extends Component {
   }
 
   componentDidMount() {
+    this.handleGet(false);
+  }
+
+  handleGet(bol = true) {
     const json = JSON.parse(getToken()) ? JSON.parse(getToken()) : [];
     let tal = 0;
     if (json.length) {
@@ -24,7 +28,10 @@ class Record extends Component {
         tal = tal + it.pay;
       });
     }
-    this.setState({ json: JSON.stringify(json), total: tal });
+    this.setState({ json: JSON.stringify(json), total: tal }, () => {
+      if (bol)
+        Toast.info(<div style={{ fontSize: "12px" }}>数据更新成功</div>, 1);
+    });
   }
 
   render() {
@@ -34,9 +41,14 @@ class Record extends Component {
       <div className="sgs-record">
         <div className="sgs-record-content">
           {jsons.length === 0 ? (
-            <div className="my-img">
-              <img src={noRecord} alt="" />
-              <div className="title">暂无记录，先去模拟试试</div>
+            <div>
+              <div className="my-img">
+                <img src={noRecord} alt="" />
+                <div className="title">暂无记录，先去模拟试试</div>
+              </div>
+              <div style={{ paddingTop: "30px" }}>
+                <Button onClick={() => this.handleGet()}>更新数据</Button>
+              </div>
             </div>
           ) : (
             <div>
@@ -74,6 +86,9 @@ class Record extends Component {
                   <img src={delect} alt="" />
                 </div>
               </div>
+              <div style={{ paddingBottom: "20px" }}>
+                <Button onClick={() => this.handleGet()}>更新数据</Button>
+              </div>
               {jsons.map((it, i) => {
                 return (
                   <div key={i} className="content-ul">
@@ -90,11 +105,11 @@ class Record extends Component {
                       </div>
                       <div className="bottom">
                         （{it.name}
-                        {it.name === "一心一力"
-                          ? "周卡礼包"
-                          : it.name === "祈福"
+                        {it.name === "祈福"
                           ? "宝箱"
-                          : "礼包"}
+                          : it.name.length === 2
+                          ? "礼包"
+                          : ""}
                         ）
                       </div>
                       <div className="content">
