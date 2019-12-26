@@ -63,3 +63,21 @@ export const stringToArr = (str = "", n = 12) => {
   }
   return strArr;
 };
+
+/**
+ *
+ * @param {*} context
+ */
+
+// 获取像素比
+export const getPixelRatio = context => {
+  const backingStore =
+    context.backingStorePixelRatio ||
+    context.webkitBackingStorePixelRatio ||
+    context.mozBackingStorePixelRatio ||
+    context.msBackingStorePixelRatio ||
+    context.oBackingStorePixelRatio ||
+    context.backingStorePixelRatio ||
+    1;
+  return (window.devicePixelRatio || 1) / backingStore;
+};

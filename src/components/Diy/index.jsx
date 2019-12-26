@@ -10,8 +10,14 @@ import {
 } from "antd-mobile";
 import SelfRadio from "./SelfRadio/index.jsx";
 import SelfInput from "./SelfInput/index.jsx";
-import { getImgCounty, getImgJ, stringToArr } from "./../../util/index.js";
+import {
+  getImgCounty,
+  getImgJ,
+  stringToArr,
+  getPixelRatio
+} from "./../../util/index.js";
 const RadioItem = Radio.RadioItem;
+
 import "./index.less";
 class Diy extends React.Component {
   constructor(props) {
@@ -36,7 +42,7 @@ class Diy extends React.Component {
       ],
       // 武将名字
       heroName: "",
-      // 武将四字成语
+      // 武将描述
       heroText: "",
       width: 260,
       height: 390,
@@ -92,6 +98,7 @@ class Diy extends React.Component {
       );
     this.handleDraw();
   };
+
   // 画图
   handleDraw = () => {
     const {
@@ -109,6 +116,11 @@ class Diy extends React.Component {
     const heroNameArr = heroName.split("");
     const myCanvas = document.getElementById("myCanvas");
     const ctx = myCanvas.getContext("2d");
+
+    const ratio = getPixelRatio(ctx);
+    myCanvas.width = width * ratio;
+    myCanvas.height = height * ratio;
+
     // // 字体加载
     // 先清除画布
     ctx.clearRect(0, 0, width, height);
@@ -119,29 +131,35 @@ class Diy extends React.Component {
     const imgHero = new Image();
     imgHero.crossOrigin = "anonymous";
     imgHero.onload = () => {
-      ctx.drawImage(imgHero, 38, 20, width - 50, height - 30);
+      ctx.drawImage(
+        imgHero,
+        38 * ratio,
+        20 * ratio,
+        (width - 50) * ratio,
+        (height - 30) * ratio
+      );
       // 画完武将再画背景，背景在武将上边
       const imgBgc = new Image();
       imgBgc.crossOrigin = "anonymous";
       imgBgc.onload = () => {
-        ctx.drawImage(imgBgc, 0, 0, width, height);
+        ctx.drawImage(imgBgc, 0, 0, width * ratio, height * ratio);
         // 等所有图片请求完再做其他操作
         // 写描述
-        ctx.font = "16px myFont1";
+        ctx.font = `${16 * ratio}px myFont1`;
         ctx.fillStyle = "#f1d96c";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         heroTextArr.map((it, i) => {
           ctx.fillText(
             it,
-            country === 3 ? 32 : 28,
-            (6 - heroTextArr.length) * 10 + 70 + i * 17,
-            30,
-            30
+            (country === 3 ? 32 : 28) * ratio,
+            ((6 - heroTextArr.length) * 10 + 70 + i * 17) * ratio,
+            30 * ratio,
+            30 * ratio
           );
         });
         // 写武将名字
-        ctx.font = "30px myFont";
+        ctx.font = `${30 * ratio}px myFont`;
         ctx.fillStyle = "#fcfcef";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -153,10 +171,10 @@ class Diy extends React.Component {
         heroNameArr.map((it, i) => {
           ctx.fillText(
             it,
-            country === 3 ? 30 : 26,
-            (4 - heroNameArr.length) * 5 + 180 + i * 30,
-            30,
-            30
+            (country === 3 ? 30 : 26) * ratio,
+            ((4 - heroNameArr.length) * 5 + 180 + i * 30) * ratio,
+            30 * ratio,
+            30 * ratio
           );
         });
         // 画武将技能框
@@ -178,11 +196,11 @@ class Diy extends React.Component {
           const length = stringToArr(it.desc, 17).length * 11;
           RectHeight += length;
         });
-        const rect = RectHeight + 29;
+        const rect = (RectHeight + 29) * ratio;
 
-        const rectPosTop = 370 - rect;
-        const rectPosLeft = 44;
-        ctx.fillRect(rectPosLeft, rectPosTop, 199, rect);
+        const rectPosTop = 370 * ratio - rect;
+        const rectPosLeft = 44 * ratio;
+        ctx.fillRect(rectPosLeft, rectPosTop, 199 * ratio, rect);
         // 添加技能描述
         art.map((it, i) => {
           ctx.shadowColor = "rgba(0, 0, 0, 1)";
@@ -197,106 +215,115 @@ class Diy extends React.Component {
             const destArr = stringToArr(it.desc, 17);
 
             imgLeft.onload = () => {
-              const st1 = stringToArr(art[0].desc, 17).length === 1 ? 14 : 4;
-              const tt1 = stringToArr(art[0].desc, 17).length === 1 ? 25 : 15;
+              const st1 =
+                stringToArr(art[0].desc, 17 * ratio).length === 1
+                  ? 14 * ratio
+                  : 4 * ratio;
+              const tt1 =
+                stringToArr(art[0].desc, 17 * ratio).length === 1
+                  ? 25 * ratio
+                  : 15 * ratio;
               let st2;
               let tt2;
               if (
-                stringToArr(art[0].desc, 17).length === 1 &&
-                stringToArr(art[1].desc, 17).length === 1
+                stringToArr(art[0].desc, 17 * ratio).length === 1 &&
+                stringToArr(art[1].desc, 17 * ratio).length === 1
               ) {
-                st2 = 24;
-                tt2 = 35;
+                st2 = 24 * ratio;
+                tt2 = 35 * ratio;
               } else if (
-                stringToArr(art[0].desc, 17).length !== 1 &&
-                stringToArr(art[1].desc, 17).length !== 1
+                stringToArr(art[0].desc, 17 * ratio).length !== 1 &&
+                stringToArr(art[1].desc, 17 * ratio).length !== 1
               ) {
-                st2 = 4;
-                tt2 = 15;
+                st2 = 4 * ratio;
+                tt2 = 15 * ratio;
               } else {
-                st2 = 14;
-                tt2 = 25;
+                st2 = 14 * ratio;
+                tt2 = 25 * ratio;
               }
 
               ctx.drawImage(
                 imgLeft,
-                rectPosLeft - 30,
+                rectPosLeft - 30 * ratio,
                 i === 0
-                  ? rectPosTop + 4
+                  ? rectPosTop + 4 * ratio
                   : i === 1
                   ? rectPosTop +
                     st1 +
-                    2 +
-                    stringToArr(art[0].desc, 17).length * 11
+                    2 * ratio +
+                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio
                   : rectPosTop +
                     st2 +
                     4 +
-                    stringToArr(art[0].desc, 17).length * 11 +
-                    stringToArr(art[1].desc, 17).length * 11,
-                50,
-                25
+                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
+                    stringToArr(art[1].desc, 17 * ratio).length * 11 * ratio,
+                50 * ratio,
+                25 * ratio
               );
-              ctx.font = "14px sans-serif";
+              ctx.font = `${14 * ratio}px sans-serif`;
               ctx.fillStyle = "#000";
               ctx.fillText(
                 it.name,
-                rectPosLeft - 23,
+                rectPosLeft - 23 * ratio,
                 i === 0
-                  ? rectPosTop + 15
+                  ? rectPosTop + 15 * ratio
                   : i === 1
                   ? rectPosTop +
                     tt1 +
-                    2 +
-                    stringToArr(art[0].desc, 17).length * 11
+                    2 * ratio +
+                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio
                   : rectPosTop +
                     tt2 +
-                    4 +
-                    stringToArr(art[0].desc, 17).length * 11 +
-                    stringToArr(art[1].desc, 17).length * 11
+                    4 * ratio +
+                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
+                    stringToArr(art[1].desc, 17 * ratio).length * 11 * ratio
               );
             };
             imgLeft.src = getImgJ(country);
-            ctx.font = "10px sans-serif";
+            ctx.font = `${10 * ratio}px sans-serif`;
             ctx.fillStyle = "#fff";
 
             destArr.map((it, index) => {
-              const ot1 = stringToArr(art[0].desc, 17).length === 1 ? 24 : 14;
+              const ot1 =
+                stringToArr(art[0].desc, 17 * ratio).length === 1
+                  ? 24 * ratio
+                  : 14 * ratio;
               let ot2;
               if (
-                stringToArr(art[0].desc, 17).length === 1 &&
-                stringToArr(art[1].desc, 17).length === 1
+                stringToArr(art[0].desc, 17 * ratio).length === 1 &&
+                stringToArr(art[1].desc, 17 * ratio).length === 1
               ) {
-                ot2 = 34;
+                ot2 = 34 * ratio;
               } else if (
-                stringToArr(art[0].desc, 17).length !== 1 &&
-                stringToArr(art[1].desc, 17).length !== 1
+                stringToArr(art[0].desc, 17 * ratio).length !== 1 &&
+                stringToArr(art[1].desc, 17 * ratio).length !== 1
               ) {
-                ot2 = 14;
+                ot2 = 14 * ratio;
               } else {
-                ot2 = 24;
+                ot2 = 24 * ratio;
               }
 
               ctx.fillText(
                 it,
-                rectPosLeft + 20,
+                rectPosLeft + 20 * ratio,
                 i === 0
-                  ? rectPosTop + 14 + index * 11
+                  ? rectPosTop + 14 * ratio + index * 11 * ratio
                   : i === 1
                   ? rectPosTop +
                     ot1 +
-                    2 +
-                    stringToArr(art[0].desc, 17).length * 11 +
-                    index * 11
+                    2 * ratio +
+                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
+                    index * 11 * ratio
                   : rectPosTop +
                     ot2 +
-                    4 +
-                    stringToArr(art[0].desc, 17).length * 11 +
-                    stringToArr(art[1].desc, 17).length * 11 +
-                    index * 11
+                    4 * ratio +
+                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
+                    stringToArr(art[1].desc, 17 * ratio).length * 11 * ratio +
+                    index * 11 * ratio
               );
             });
 
-            ctx.font = "12px sans-serif";
+            ctx.font = `${12 * ratio}px sans-serif`;
             ctx.fillStyle = "#fff";
             ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
             ctx.shadowOffsetX = 2;
@@ -305,10 +332,10 @@ class Diy extends React.Component {
             if (linkBol)
               ctx.fillText(
                 "Copyright:小黑，链接：applis.applinzi.com/",
-                40,
-                380,
-                200,
-                20
+                40 * ratio,
+                380 * ratio,
+                200 * ratio,
+                20 * ratio
               );
             ctx.shadowColor = "rgba(0, 0, 0, 1)";
             ctx.shadowOffsetX = 0;
@@ -328,35 +355,6 @@ class Diy extends React.Component {
       imgBgc.src = imgBgcStr;
     };
     imgHero.src = files[0].url;
-  };
-  // 下载图片
-  download = () => {
-    this.downloadFile("diy.jpeg", this.state.strDataURI);
-  };
-  //下载
-  downloadFile = (fileName, content) => {
-    let aLink = document.createElement("a");
-    let blob = this.base64ToBlob(content); //new Blob([content]);
-    console.log(blob);
-    let evt = document.createEvent("HTMLEvents");
-    evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
-    aLink.download = fileName;
-    aLink.href = URL.createObjectURL(blob);
-    aLink.click();
-  };
-  //base64转blob
-  base64ToBlob = code => {
-    let parts = code.split(";base64,");
-    let contentType = parts[0].split(":")[1];
-    let raw = window.atob(parts[1]);
-    let rawLength = raw.length;
-
-    let uInt8Array = new Uint8Array(rawLength);
-
-    for (let i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
-    }
-    return new Blob([uInt8Array], { type: contentType });
   };
 
   render() {
@@ -521,16 +519,15 @@ class Diy extends React.Component {
           onClose={() => this.setState({ modal: false })}
           title="DIY武将"
           style={{ width: "300px" }}
+          afterClose={() => {}}
           footer={[
             {
-              text: "保存图片到相册",
+              text: "长按图片即可实现保存",
               onPress: () => {
-                this.download();
                 this.setState({ modal: false });
               }
             }
           ]}
-          afterClose={() => {}}
         >
           <img src={this.state.strDataURI} alt="" style={{ width: "260px" }} />
         </Modal>
