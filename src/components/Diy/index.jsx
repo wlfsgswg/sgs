@@ -51,7 +51,7 @@ class Diy extends React.Component {
   };
   // 一键生成cnavans,条件预判
   handleSummit = () => {
-    const { heroName, heroText, art, files, width, height } = this.state;
+    const { heroName, heroText, art, files } = this.state;
     if (!heroName)
       return Toast.info(
         <div style={{ fontSize: "12px" }}>请填写武将名称！</div>,
@@ -178,11 +178,11 @@ class Diy extends React.Component {
           const length = stringToArr(it.desc, 17).length * 11;
           RectHeight += length;
         });
-        const rect = RectHeight + 35;
+        const rect = RectHeight + 29;
 
         const rectPosTop = 370 - rect;
         const rectPosLeft = 44;
-        ctx.fillRect(rectPosLeft, rectPosTop, 198, rect);
+        ctx.fillRect(rectPosLeft, rectPosTop, 199, rect);
         // 添加技能描述
         art.map((it, i) => {
           ctx.shadowColor = "rgba(0, 0, 0, 1)";
@@ -330,15 +330,14 @@ class Diy extends React.Component {
     imgHero.src = files[0].url;
   };
   // 下载图片
-
   download = () => {
-    this.downloadFile("diy.png", this.state.strDataURI);
+    this.downloadFile("diy.jpeg", this.state.strDataURI);
   };
   //下载
   downloadFile = (fileName, content) => {
     let aLink = document.createElement("a");
     let blob = this.base64ToBlob(content); //new Blob([content]);
-
+    console.log(blob);
     let evt = document.createEvent("HTMLEvents");
     evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
     aLink.download = fileName;
