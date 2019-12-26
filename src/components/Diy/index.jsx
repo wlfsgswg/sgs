@@ -96,7 +96,10 @@ class Diy extends React.Component {
         <div style={{ fontSize: "12px" }}>你需要上传背景图片！</div>,
         1
       );
-    this.handleDraw();
+    Toast.loading("处理中，稍等...", 1);
+    setTimeout(() => {
+      this.handleDraw();
+    }, 1000);
   };
 
   // 画图
@@ -522,7 +525,7 @@ class Diy extends React.Component {
           afterClose={() => {}}
           footer={[
             {
-              text: "长按图片即可实现保存",
+              text: "长按图片实现保存分享",
               onPress: () => {
                 this.setState({ modal: false });
               }
