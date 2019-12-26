@@ -512,8 +512,12 @@ class Diy extends React.Component {
             id="myCanvas"
             width={width}
             height={height}
-            style={{ position: "absolute", left: "-2000" }}
+            style={{ position: "absolute", left: "-2000px" }}
           ></canvas>
+          <div style={{ position: "absolute", left: "-2000px" }}>
+            <div className="sgs-y-loading-font">404</div>
+            <div className="sgs-y-loading-font1">405</div>
+          </div>
         </div>
         <Modal
           visible={this.state.modal}
