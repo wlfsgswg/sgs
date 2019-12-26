@@ -219,24 +219,24 @@ class Diy extends React.Component {
 
             imgLeft.onload = () => {
               const st1 =
-                stringToArr(art[0].desc, 17 * ratio).length === 1
+                stringToArr(art[0].desc, 17).length === 1
                   ? 14 * ratio
                   : 4 * ratio;
               const tt1 =
-                stringToArr(art[0].desc, 17 * ratio).length === 1
+                stringToArr(art[0].desc, 17).length === 1
                   ? 25 * ratio
                   : 15 * ratio;
               let st2;
               let tt2;
               if (
-                stringToArr(art[0].desc, 17 * ratio).length === 1 &&
-                stringToArr(art[1].desc, 17 * ratio).length === 1
+                stringToArr(art[0].desc, 17).length === 1 &&
+                stringToArr(art[1].desc, 17).length === 1
               ) {
                 st2 = 24 * ratio;
                 tt2 = 35 * ratio;
               } else if (
-                stringToArr(art[0].desc, 17 * ratio).length !== 1 &&
-                stringToArr(art[1].desc, 17 * ratio).length !== 1
+                stringToArr(art[0].desc, 17).length !== 1 &&
+                stringToArr(art[1].desc, 17).length !== 1
               ) {
                 st2 = 4 * ratio;
                 tt2 = 15 * ratio;
@@ -254,12 +254,12 @@ class Diy extends React.Component {
                   ? rectPosTop +
                     st1 +
                     2 * ratio +
-                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio
+                    stringToArr(art[0].desc, 17).length * 11 * ratio
                   : rectPosTop +
                     st2 +
                     4 +
-                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
-                    stringToArr(art[1].desc, 17 * ratio).length * 11 * ratio,
+                    stringToArr(art[0].desc, 17).length * 11 * ratio +
+                    stringToArr(art[1].desc, 17).length * 11 * ratio,
                 50 * ratio,
                 25 * ratio
               );
@@ -274,12 +274,12 @@ class Diy extends React.Component {
                   ? rectPosTop +
                     tt1 +
                     2 * ratio +
-                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio
+                    stringToArr(art[0].desc, 17).length * 11 * ratio
                   : rectPosTop +
                     tt2 +
                     4 * ratio +
-                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
-                    stringToArr(art[1].desc, 17 * ratio).length * 11 * ratio
+                    stringToArr(art[0].desc, 17).length * 11 * ratio +
+                    stringToArr(art[1].desc, 17).length * 11 * ratio
               );
             };
             imgLeft.src = getImgJ(country);
@@ -288,18 +288,18 @@ class Diy extends React.Component {
 
             destArr.map((it, index) => {
               const ot1 =
-                stringToArr(art[0].desc, 17 * ratio).length === 1
+                stringToArr(art[0].desc, 17).length === 1
                   ? 24 * ratio
                   : 14 * ratio;
               let ot2;
               if (
-                stringToArr(art[0].desc, 17 * ratio).length === 1 &&
-                stringToArr(art[1].desc, 17 * ratio).length === 1
+                stringToArr(art[0].desc, 17).length === 1 &&
+                stringToArr(art[1].desc, 17).length === 1
               ) {
                 ot2 = 34 * ratio;
               } else if (
-                stringToArr(art[0].desc, 17 * ratio).length !== 1 &&
-                stringToArr(art[1].desc, 17 * ratio).length !== 1
+                stringToArr(art[0].desc, 17).length !== 1 &&
+                stringToArr(art[1].desc, 17).length !== 1
               ) {
                 ot2 = 14 * ratio;
               } else {
@@ -315,13 +315,13 @@ class Diy extends React.Component {
                   ? rectPosTop +
                     ot1 +
                     2 * ratio +
-                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
+                    stringToArr(art[0].desc, 17).length * 11 * ratio +
                     index * 11 * ratio
                   : rectPosTop +
                     ot2 +
                     4 * ratio +
-                    stringToArr(art[0].desc, 17 * ratio).length * 11 * ratio +
-                    stringToArr(art[1].desc, 17 * ratio).length * 11 * ratio +
+                    stringToArr(art[0].desc, 17).length * 11 * ratio +
+                    stringToArr(art[1].desc, 17).length * 11 * ratio +
                     index * 11 * ratio
               );
             });
