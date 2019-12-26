@@ -7,9 +7,40 @@ import "./index.less";
 class Diy extends React.Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   // 背景图片
+    //   files: [],
+    //   //武将体力
+    //   physical: 3,
+    //   //武将势力
+    //   country: 1,
+    //   // 武将技能
+    //   art: [
+    //     {
+    //       name: "",
+    //       desc: ""
+    //     },
+    //     {
+    //       name: "",
+    //       desc: ""
+    //     }
+    //   ],
+    //   // 武将名字
+    //   heroName: "",
+    //   // 武将四字成语
+    //   heroText: "",
+    //   width: 260,
+    //   height: 390
+    // };
+
     this.state = {
       // 背景图片
-      files: [],
+      files: [
+        {
+          url:
+            "https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=a83be289a9c27d1eb12b33967abcc60b/d043ad4bd11373f0fe063fb2a90f4bfbfbed04e5.jpg"
+        }
+      ],
       //武将体力
       physical: 3,
       //武将势力
@@ -17,20 +48,26 @@ class Diy extends React.Component {
       // 武将技能
       art: [
         {
-          name: "",
-          desc: ""
+          name: "激昂",
+          desc: "你打牌可以很激昂你打牌可以"
         },
         {
-          name: "",
-          desc: ""
+          name: "天义",
+          desc: "义起你可以没义义起你可"
+        },
+        {
+          name: "天义",
+          desc:
+            "义起你可以没义起你可义起你可以没义起你可以没义起你可以没义起义起你可以没义起你可以没义起你可以没义起以没义起你可以没义起你可以没义起义起你可以没义起你可以没义起你可以没义起义起你可以没义起你可以没义起"
         }
       ],
       // 武将名字
-      heroName: "",
+      heroName: "孙策",
       // 武将四字成语
-      heroText: "",
+      heroText: "京东小霸王",
       width: 260,
-      height: 390
+      height: 390,
+      strDataURI: ""
     };
   }
 
@@ -104,10 +141,12 @@ class Diy extends React.Component {
 
     // 武将图
     const imgHero = new Image();
+    imgHero.crossOrigin = "anonymous";
     imgHero.onload = () => {
       ctx.drawImage(imgHero, 38, 20, width - 50, height - 30);
       // 画完武将再画背景，背景在武将上边
       const imgBgc = new Image();
+      imgBgc.crossOrigin = "anonymous";
       imgBgc.onload = () => {
         ctx.drawImage(imgBgc, 0, 0, width, height);
         // 等所有图片请求完再做其他操作
@@ -209,9 +248,13 @@ class Diy extends React.Component {
                 i === 0
                   ? rectPosTop + 4
                   : i === 1
-                  ? rectPosTop + st1 + stringToArr(art[0].desc, 17).length * 11
+                  ? rectPosTop +
+                    st1 +
+                    2 +
+                    stringToArr(art[0].desc, 17).length * 11
                   : rectPosTop +
                     st2 +
+                    4 +
                     stringToArr(art[0].desc, 17).length * 11 +
                     stringToArr(art[1].desc, 17).length * 11,
                 50,
@@ -225,9 +268,13 @@ class Diy extends React.Component {
                 i === 0
                   ? rectPosTop + 15
                   : i === 1
-                  ? rectPosTop + tt1 + stringToArr(art[0].desc, 17).length * 11
+                  ? rectPosTop +
+                    tt1 +
+                    2 +
+                    stringToArr(art[0].desc, 17).length * 11
                   : rectPosTop +
                     tt2 +
+                    4 +
                     stringToArr(art[0].desc, 17).length * 11 +
                     stringToArr(art[1].desc, 17).length * 11
               );
@@ -261,15 +308,24 @@ class Diy extends React.Component {
                   : i === 1
                   ? rectPosTop +
                     ot1 +
+                    2 +
                     stringToArr(art[0].desc, 17).length * 11 +
                     index * 11
                   : rectPosTop +
                     ot2 +
+                    4 +
                     stringToArr(art[0].desc, 17).length * 11 +
                     stringToArr(art[1].desc, 17).length * 11 +
                     index * 11
               );
             });
+
+            setTimeout(() => {
+              const strDataURI = myCanvas.toDataURL("image/jpeg");
+              this.setState({ strDataURI });
+            }, 300);
+
+            //
           }
         });
         //
@@ -408,7 +464,13 @@ class Diy extends React.Component {
           <div>
             下图为diy图片展示区，完成输入框填写，点击按钮即可展示，开发ing，敬请等待
           </div>
-          <canvas id="myCanvas" width={width} height={height}></canvas>
+          <canvas
+            id="myCanvas"
+            width={width}
+            height={height}
+            style={{ position: "absolute", left: "-2000" }}
+          ></canvas>
+          <img src={this.state.strDataURI} alt="" />
         </div>
       </div>
     );

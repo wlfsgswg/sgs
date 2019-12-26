@@ -40,9 +40,7 @@ class TabBarExample extends React.Component {
     );
   }
 
-  handlePress(e) {
-    console.log(e);
-  }
+  handlePress(e) {}
 
   render() {
     return (
