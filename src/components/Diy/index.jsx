@@ -1,5 +1,12 @@
 import React from "react";
-import { ImagePicker, List, Toast, InputItem, Button } from "antd-mobile";
+import {
+  ImagePicker,
+  List,
+  Toast,
+  InputItem,
+  Button,
+  Modal
+} from "antd-mobile";
 import SelfRadio from "./SelfRadio/index.jsx";
 import SelfInput from "./SelfInput/index.jsx";
 import { getImgCounty, getImgJ, stringToArr } from "./../../util/index.js";
@@ -30,7 +37,9 @@ class Diy extends React.Component {
     //   // 武将四字成语
     //   heroText: "",
     //   width: 260,
-    //   height: 390
+    //   height: 390,
+    // strDataURI: "",
+    //   modal:false
     // };
 
     this.state = {
@@ -67,7 +76,8 @@ class Diy extends React.Component {
       heroText: "京东小霸王",
       width: 260,
       height: 390,
-      strDataURI: ""
+      strDataURI: "",
+      modal: false
     };
   }
 
@@ -322,7 +332,7 @@ class Diy extends React.Component {
 
             setTimeout(() => {
               const strDataURI = myCanvas.toDataURL("image/jpeg");
-              this.setState({ strDataURI });
+              this.setState({ strDataURI, modal: true });
             }, 300);
 
             //
@@ -461,17 +471,32 @@ class Diy extends React.Component {
           点击生成DIY武将
         </Button>
         <div style={{ width, margin: "0 auto" }}>
-          <div>
-            下图为diy图片展示区，完成输入框填写，点击按钮即可展示，开发ing，敬请等待
-          </div>
           <canvas
             id="myCanvas"
             width={width}
             height={height}
             style={{ position: "absolute", left: "-2000" }}
           ></canvas>
-          <img src={this.state.strDataURI} alt="" />
         </div>
+        <Modal
+          visible={this.state.modal}
+          transparent
+          maskClosable={false}
+          onClose={() => this.setState({ modal: false })}
+          title="DIY武将"
+          style={{ width: "300px" }}
+          footer={[
+            {
+              text: "保存图片到相册",
+              onPress: () => {
+                this.setState({ modal: false });
+              }
+            }
+          ]}
+          afterClose={() => {}}
+        >
+          <img src={this.state.strDataURI} alt="" style={{ width: "260px" }} />
+        </Modal>
       </div>
     );
   }
