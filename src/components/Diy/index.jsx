@@ -529,7 +529,7 @@ class Diy extends React.Component {
           afterClose={() => {}}
           footer={[
             {
-              text: "长按图片实现保存分享",
+              text: "长按图片即可保存",
               onPress: () => {
                 this.setState({ modal: false });
               }

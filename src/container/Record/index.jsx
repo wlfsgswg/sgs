@@ -44,7 +44,9 @@ class Record extends Component {
             <div>
               <div className="my-img">
                 <img src={noRecord} alt="" />
-                <div className="title">暂无记录，先去模拟试试</div>
+                <div className="title" style={{ fontSize: "1rem" }}>
+                  暂无记录，先去模拟试试
+                </div>
               </div>
               <div style={{ paddingTop: "30px" }}>
                 <Button onClick={() => this.handleGet()}>更新数据</Button>
