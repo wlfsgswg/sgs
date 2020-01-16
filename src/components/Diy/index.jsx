@@ -334,7 +334,7 @@ class Diy extends React.Component {
             ctx.shadowBlur = 2;
             if (linkBol)
               ctx.fillText(
-                "Copyright:小黑，链接：www.sgs.com",
+                "Copyright:小黑，链接：www.sgs.ink",
                 40 * ratio,
                 380 * ratio,
                 200 * ratio,
