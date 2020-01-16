@@ -136,7 +136,7 @@ class CopyRight extends Component {
                     </div>
                   </div>
                   <div className="right">
-                    <Clipboard num={"applis.applinzi.com"} type={"link"} />
+                    <Clipboard num={"www.sgs.ink"} type={"link"} />
                   </div>
                 </div>
 
