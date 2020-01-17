@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Drawer, Modal } from "antd-mobile";
-import Bgc from "./img/bgc.jpeg";
-import Liu from "./img/liuxie.jpeg";
 import "./index.less";
 import Qq from "./../../icon/qq.png";
 import Qqq from "./../../icon/qqqun.png";
@@ -69,13 +67,13 @@ class CopyRight extends Component {
         >
           <div className="sgs-copy-content">
             <div className="top">
-              <img src={Bgc} alt="" />
+              <img src={"http://cdn.sgs.ink/bgc.jpeg"} alt="" />
             </div>
             <div className="pos">
               <div className="content">
                 <div className="img">
                   <a href="https://author.baidu.com/home/1625815363789028">
-                    <img src={Liu} alt="" />
+                    <img src={"http://cdn.sgs.ink/liuxie.jpeg"} alt="" />
                   </a>
                 </div>
 
