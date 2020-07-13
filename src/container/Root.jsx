@@ -8,23 +8,19 @@ class Root extends Component {
         {/* <TabBar /> */}
         <div className="wlf-root-content">
           <div className="wlf-root-content-top">
-            为方便大家更好的接触三国杀祈福模拟，祈福模式现已升级，现在通过微信、QQ直接打开小程序就能实现祈福啦！！！
+            为方便大家更好的接触三国杀祈福模拟，祈福模式现已升级，现在通过QQ直接打开小程序就能实现祈福啦！！！
           </div>
           <div className="p-t-10 p-b-10">方法一：</div>
           <div className="fw600">
-            打开微信直接搜【祈福模拟】微信小程序进入即可祈福
+            打开QQ直接搜【祈福模拟】QQ小程序进入即可祈福
           </div>
           <div className="p-t-10 p-b-10">方法二：</div>
           <div className="fw600">
-            打开QQ直接搜【祈福模拟】QQ小程序进入即可祈福
-          </div>
-          <div className="p-t-10 p-b-10">方法三：</div>
-          <div className="fw600">
-            长按屏幕保存以下微信小程序二维码通过微信扫一扫识别二维码即可进入祈福
+            长按屏幕保存以下QQ小程序二维码通过QQ扫一扫识别二维码即可进入祈福
           </div>
           <div className="img">
             <img
-              src="http://wlf-sgswg.oss-cn-hangzhou.aliyuncs.com/qfmn/qfmn.jpg"
+              src="http://wlf-sgswg.oss-cn-hangzhou.aliyuncs.com/qfmn/qq.png"
               alt=""
               style={{ width: "200px" }}
             />
