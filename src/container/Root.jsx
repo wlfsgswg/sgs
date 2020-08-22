@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./root.less";
 // import { TabBar } from "./../components/index.js";
+import QqShouSha from "./../image/img-ewm/shousha_qq.png";
+import WxShouSha from "./../image/img-ewm/shousha_wx.jpg";
+import QqOl from "./../image/img-ewm/ol_qq.png";
+import WxOl from "./../image/img-ewm/ol_wx.jpg";
 class Root extends Component {
   render() {
     return (
@@ -8,25 +12,40 @@ class Root extends Component {
         {/* <TabBar /> */}
         <div className="wlf-root-content">
           <div className="wlf-root-content-top">
-            为方便大家更好的接触三国杀祈福模拟，祈福模式现已升级，现在通过QQ直接打开小程序就能实现祈福啦！！！
+            好消息，好消息，【祈福模拟】，【手杀道具模拟】小程序正式上线微信和QQ平台啦，包含OL、十周年历次祈福活动；手杀数次开盒子模拟体验。您可以通过以下三种方式进行体验：
           </div>
-          <div className="p-t-10 p-b-10">方法一：</div>
+          <div className="fw600 p-t-10 p-b-10">
+            方法1：打开QQ或微信直接搜【祈福模拟】，【手杀道具模拟】QQ或微信小程序进入即可模拟
+          </div>
+          <div className="fw600 p-b-10">
+            方法2：长按屏幕或则截图保存以下QQ小程序二维码通过QQ扫一扫识别二维码即可进入模拟，左【祈福模拟】QQ二维码，右【手杀道具模拟】QQ二维码
+          </div>
+          <div className="clearfix">
+            <div className="l-left">
+              <div className="img">
+                <img src={QqOl} alt="" style={{ width: "150px" }} />
+              </div>
+            </div>
+            <div className="r-right">
+              <div className="img">
+                <img src={QqShouSha} alt="" style={{ width: "150px" }} />
+              </div>
+            </div>
+          </div>
           <div className="fw600">
-            打开QQ直接搜【祈福模拟】QQ小程序进入即可祈福
+            方法3：长按屏幕或则截图保存以下微信小程序二维码通过微信扫一扫识别二维码即可进入模拟，左【祈福模拟】微信二维码，右【手杀道具模拟】微信二维码
           </div>
-          <div className="p-t-10 p-b-10">方法二：</div>
-          <div className="fw600">
-            长按屏幕保存以下QQ小程序二维码通过QQ扫一扫识别二维码即可进入祈福
-          </div>
-          <div className="img">
-            <img
-              src="http://wlf-sgswg.oss-cn-hangzhou.aliyuncs.com/qfmn/qq.png"
-              alt=""
-              style={{ width: "200px" }}
-            />
-          </div>
-          <div className="fw600">
-            祈福模拟小程序包含三国杀历次祈福活动，打破网页端祈福单一性，不仅有【OL】版本祈福，更包含【十周年】版本祈福，欢迎大家尝试和光临！
+          <div className="clearfix">
+            <div className="l-left">
+              <div className="img">
+                <img src={WxOl} alt="" style={{ width: "150px" }} />
+              </div>
+            </div>
+            <div className="r-right">
+              <div className="img">
+                <img src={WxShouSha} alt="" style={{ width: "150px" }} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
